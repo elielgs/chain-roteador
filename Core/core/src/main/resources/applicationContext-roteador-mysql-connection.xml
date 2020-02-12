@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+    <import resource="classpath:property-configurer.xml"/>
+
+	<!-- >bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://${mysql.hostname}:${mysql.port}/${mysql.schema}?zeroDateTimeBehavior=convertToNull" />
+		<property name="username" value="root"/>
+      	<property name="password" value="12345678"/>
+	</bean>       
+	
+	<bean id="dataSourceCep" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://${mysql.hostname}:${mysql.port}/CEP?zeroDateTimeBehavior=convertToNull" />
+		<property name="username" value="root"/>
+      	<property name="password" value="tsuzctN]bQ-C5]2"/>
+	</bean>                                                     
+
+	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+  		<property name="dataSource" ref="dataSource"/>
+	</bean-->
+	
+<!-- 	<bean id="txManagerCep" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"> -->
+<!--   		<property name="dataSourceCep" ref="dataSourceCep"/> -->
+<!-- 	</bean> -->
+
+
+</beans>

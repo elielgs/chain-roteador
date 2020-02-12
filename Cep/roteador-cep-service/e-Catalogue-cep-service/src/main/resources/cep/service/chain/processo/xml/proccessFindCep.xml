@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<processo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="processo.xsd" nome="findCep"
+	inicio="CheckCepInformedCommand">
+	
+	 <sequencia executa="CheckCepInformedCommand">
+        <resultado tipo="true" proximo="BuildMessageCommand"/>
+        <resultado tipo="false">
+            <excecao tipo="COMMAND" construcao="MN000" />
+        </resultado>
+    </sequencia>
+ 
+    <sequencia executa="BuildMessageCommand" proximo="SendMailCommand"/>
+    <sequencia executa="SendMailCommand"/>
+     
+</processo>

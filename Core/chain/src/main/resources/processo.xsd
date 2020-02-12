@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="processo">
+    <xs:complexType>
+      <xs:sequence>
+    	<xs:element ref="transacao" minOccurs="0" maxOccurs="unbounded" />
+      	<xs:element ref="sequencia" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+      <xs:attribute name="nome" type="xs:NMTOKEN" use="required" />
+      <xs:attribute name="inicio" type="xs:NMTOKEN" use="required" />
+    </xs:complexType> 
+  </xs:element>
+  
+  
+  <xs:element name="transacao">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="sequencia" maxOccurs="unbounded" />
+        <xs:element ref="sucesso" minOccurs="0" maxOccurs="1" />
+      </xs:sequence>
+      <xs:attribute name="nome" type="xs:NMTOKEN" use="required" />
+    </xs:complexType> 
+  </xs:element>
+  
+  
+	<xs:element name="sucesso">
+		<xs:complexType>
+			<xs:attribute name="tipoRetorno">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="sequencia" />
+						<xs:enumeration value="transacao" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="nomeRetorno" type="xs:NMTOKEN" />
+		</xs:complexType>
+	</xs:element>
+
+
+  <xs:element name="resultado">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="excecao" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+      <xs:attribute name="tipo" type="xs:NMTOKEN" use="required" />
+      <xs:attribute name="proximo" type="xs:NMTOKEN" use="optional" />
+      <xs:attribute name="incluir" type="xs:NMTOKEN" use="optional" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="sequencia">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="resultado" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+      <xs:attribute name="executa" type="xs:NMTOKEN" use="optional" /> 
+      <xs:attribute name="incluir" type="xs:NMTOKEN" use="optional" />
+	  <xs:attribute name="proximo" type="xs:NMTOKEN" use="optional" />
+	  <xs:attribute name="transacao" type="xs:NMTOKEN" use="optional" />  
+    </xs:complexType>
+  </xs:element>
+
+  
+  <xs:element name="excecao">
+    <xs:complexType>
+      <xs:attribute name="tipo" type="xs:NMTOKEN" use="required" /> 
+      <xs:attribute name="construcao" type="xs:NMTOKEN" use="required" />
+    </xs:complexType>
+  </xs:element>
+  
+
+</xs:schema>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<processo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	      xsi:noNamespaceSchemaLocation="processo.xsd"
+	      nome="exemploProcesso" inicio="A">
+	
+	
+		<sequencia executa="A">
+			<resultado tipo="true" proximo="B" />
+			<resultado tipo="false">
+				<excecao tipo="COMMAND" construcao="MN_001" />
+			</resultado>
+		</sequencia>
+		
+		<sequencia executa="B" proximo="C" />
+		
+		<sequencia executa="C" proximo="D" />
+		
+		<sequencia executa="D">
+			<resultado tipo="true" proximo="E" />
+			<resultado tipo="false" proximo="F" />
+		</sequencia>
+		
+		<sequencia executa="E"/>
+		<sequencia executa="F"/>
+					
+		
+	
+</processo>

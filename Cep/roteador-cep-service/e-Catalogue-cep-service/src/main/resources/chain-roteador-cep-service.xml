@@ -1,0 +1,17 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+          http://www.springframework.org/schema/beans 
+          http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<bean id="Chain" class="roteador.chain.Chain">
+		<constructor-arg>
+			<list>
+				<value>cep/service/chain/processo/xml/proccessFindCep.xml</value>
+			</list>
+		</constructor-arg>
+<!-- 		<property name="transactionManager" ref="txManagerCep"/> -->
+	</bean>
+
+</beans>

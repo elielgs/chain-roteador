@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--suppress DuplicatedBeanNamesInspection -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- >beans profile="default,dev"-->
+        <bean id="propertyConfigurer" class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
+            <property name="locations">
+                <list>
+                    <value>classpath:environment-dev.properties</value>
+                    
+                </list>
+            </property>
+            <property name="ignoreResourceNotFound" value="true"/>
+            <property name="ignoreUnresolvablePlaceholders" value="true"/>
+        </bean>
+    <!--  >/beans-->
+
+    <!-- >beans profile="local">
+        <bean id="propertyConfigurer" class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
+            <property name="locations">
+                <list>
+                    <value>classpath:environment.properties</value>
+                    <value>classpath:AwsCredentials.properties</value>
+                    <value>file:${user.dir}/conf/environment.properties</value>
+                </list>
+            </property>
+            <property name="ignoreResourceNotFound" value="true"/>
+            <property name="ignoreUnresolvablePlaceholders" value="true"/>
+        </bean>
+    </beans-->
+
+    </beans>
