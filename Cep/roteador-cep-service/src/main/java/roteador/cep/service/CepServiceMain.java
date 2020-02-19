@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import roteador.chain.Chain;
 import roteador.core.ContextECatalogue;
 import roteador.core.constants.ECatalogueContextKey;
-import roteador.core.exception.command.CommandException;
 
 @SpringBootApplication
 @RestController

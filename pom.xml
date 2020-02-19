@@ -17,51 +17,9 @@
 
 	<properties>
 		<spring-version>5.2.3.RELEASE</spring-version>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-					<encoding>ISO-8859-1</encoding>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-release-plugin</artifactId>
-				<version>2.2.2</version>
-				<configuration>
-					<autoVersionSubmodules>true</autoVersionSubmodules>
-				</configuration>
-			</plugin>
-		</plugins>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-jar-plugin</artifactId>
-					<configuration>
-						<!--<excludes> -->
-						<!--<exclude>**/log4j.xml</exclude> -->
-						<!--</excludes> -->
-						<archive>
-							<manifest>
-								<!--suppress MavenModelInspection -->
-								<mainClass>${mainClass}</mainClass>
-							</manifest>
-						</archive>
-					</configuration>
-				</plugin>
-
-			</plugins>
-		</pluginManagement>
-
-	</build>
 
 	<dependencies>
 		<dependency>
