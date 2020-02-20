@@ -8,7 +8,7 @@
 	<bean id="Chain" class="roteador.chain.Chain">
 		<constructor-arg>
 			<list>
-				<value>cep/service/chain/processo/xml/proccessFindCep.xml</value>
+				<value>cep/service/chain/processo/xml/processFindAPIById.xml</value>
 			</list>
 		</constructor-arg>
 <!-- 		<property name="transactionManager" ref="txManagerCep"/> -->

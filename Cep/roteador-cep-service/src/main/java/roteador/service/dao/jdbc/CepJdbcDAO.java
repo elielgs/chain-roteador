@@ -1,4 +1,4 @@
-package roteador.cep.service.dao.jdbc;
+package roteador.service.dao.jdbc;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

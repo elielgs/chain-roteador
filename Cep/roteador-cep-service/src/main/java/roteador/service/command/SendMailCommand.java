@@ -1,4 +1,4 @@
-package roteador.cep.service.command;
+package roteador.service.command;
 
 
 import org.apache.commons.chain.Context;
