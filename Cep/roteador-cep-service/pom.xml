@@ -17,7 +17,7 @@
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
-		<start-class>roteador.cep.service.ServiceMain</start-class>
+		<start-class>roteador.service.ServiceMain</start-class>
 	</properties>
 
 	<build>
