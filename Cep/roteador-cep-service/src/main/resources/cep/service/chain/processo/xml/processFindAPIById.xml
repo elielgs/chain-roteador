@@ -2,6 +2,7 @@
 <processo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="processo.xsd" nome="findAPIById"
 	inicio="SearchAPIsListCommand">
+	
 
     <sequencia executa="SearchAPIsListCommand" proximo="SelectAPIFromAPIListCommand"/>
     <sequencia executa="SelectAPIFromAPIListCommand" >
@@ -10,6 +11,7 @@
             <excecao tipo="COMMAND" construcao="MN000" />
         </resultado>
      </sequencia>
-     <sequencia executa="SearchAPIVersionCommand" proximo="BuildJSONReturnCommand"/>
+     <sequencia executa="SearchAPIVersionCommand" proximo="SearchAPIVersionDocumentationCommand"/>
+ 	<sequencia executa="SearchAPIVersionDocumentationCommand" proximo="BuildJSONReturnCommand"/>
  	<sequencia executa="BuildJSONReturnCommand"/>
 </processo>

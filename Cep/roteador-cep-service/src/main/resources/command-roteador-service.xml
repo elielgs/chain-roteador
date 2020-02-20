@@ -15,5 +15,6 @@
 	<bean id="BuildJSONReturnCommand" class="roteador.service.command.BuildJSONReturnCommand"/>
 	<bean id="SelectAPIFromAPIListCommand" class="roteador.service.command.SelectAPIFromAPIListCommand"/>
 	<bean id="SearchAPIVersionCommand" class="roteador.service.command.SearchAPIVersionCommand"/>
+	<bean id="SearchAPIVersionDocumentationCommand" class="roteador.service.command.SearchAPIVersionDocumentationCommand"/>
 
 </beans>

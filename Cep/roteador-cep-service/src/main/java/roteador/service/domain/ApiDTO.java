@@ -11,8 +11,16 @@ public class ApiDTO implements Serializable {
 	private String description;
 	private boolean active;
 	private APIVersionDTO apiVersionDTO;
+	private APIVersionDocumentationDTO apiVersionDocumentationDTO; 
 	
 	
+	
+	public APIVersionDocumentationDTO getApiVersionDocumentationDTO() {
+		return apiVersionDocumentationDTO;
+	}
+	public void setApiVersionDocumentationDTO(APIVersionDocumentationDTO apiVersionDocumentationDTO) {
+		this.apiVersionDocumentationDTO = apiVersionDocumentationDTO;
+	}
 	public APIVersionDTO getApiVersionDTO() {
 		return apiVersionDTO;
 	}
