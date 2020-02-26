@@ -1,4 +1,4 @@
-package roteador.service.domain;
+package roteador.entities;
 
 import java.io.Serializable;
 

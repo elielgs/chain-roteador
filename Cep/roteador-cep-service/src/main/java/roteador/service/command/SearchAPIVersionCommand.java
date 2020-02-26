@@ -10,8 +10,8 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 
 import roteador.core.constants.ECatalogueContextKey;
-import roteador.service.domain.APIVersionDTO;
-import roteador.service.domain.ApiDTO;
+import roteador.entities.APIVersionDTO;
+import roteador.entities.ApiDTO;
 
 public class SearchAPIVersionCommand extends AbstractAPIConnectionCommand {
 

@@ -4,7 +4,7 @@ import org.apache.commons.chain.Command;
 import org.apache.commons.chain.Context;
 
 import roteador.core.constants.ECatalogueContextKey;
-import roteador.service.domain.ApiDTO;
+import roteador.entities.ApiDTO;
 
 public class SelectAPIFromAPIListCommand implements Command {
 

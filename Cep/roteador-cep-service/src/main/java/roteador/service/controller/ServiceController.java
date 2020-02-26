@@ -10,7 +10,6 @@ import roteador.core.ContextECatalogue;
 import roteador.core.constants.ECatalogueContextKey;
 import roteador.core.exception.command.CommandException;
 import roteador.service.ServiceMain;
-import roteador.service.domain.ApiDTO;
 
 @RestController
 public class ServiceController {

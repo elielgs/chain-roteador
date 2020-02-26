@@ -10,9 +10,9 @@
 
 	<modules>
 		<module>Cep/roteador-cep-service</module>
-
 		<module>Core/chain</module>
 		<module>Core/core</module>
+		<module>Entities</module>
 	</modules>
 
 	<properties>

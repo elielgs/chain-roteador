@@ -21,7 +21,6 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import roteador.service.domain.ApiDTO;
 
 @ImportResource("application.properties")
 public abstract class AbstractCMSConnectionCommand implements Command {
