@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<processo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="processo.xsd" nome="salvarOrganizacoes"
+	inicio="GravarOrganizacoesCommand">
+	
+
+    <sequencia executa="GravarOrganizacoesCommand" proximo="BuildJSONReturnCommand"/>
+ 	<sequencia executa="BuildJSONReturnCommand"/>
+</processo>

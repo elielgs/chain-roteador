@@ -1,12 +1,20 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:mongo="http://www.springframework.org/schema/data/mongo"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:context="http://www.springframework.org/schema/context"
+          xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+          xsi:schemaLocation=
+          "http://www.springframework.org/schema/context
+          https://www.springframework.org/schema/context/spring-context.xsd
+          http://www.springframework.org/schema/data/mongo https://www.springframework.org/schema/data/mongo/spring-mongo.xsd
+          http://www.springframework.org/schema/beans
+          https://www.springframework.org/schema/beans/spring-beans.xsd">
 
-          http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd">
+    <!-- Default bean name is 'mongo' -->
+    <mongo:mongo-client host="localhost" port="27017"/>
 
+	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+  		<constructor-arg ref="mongoClient"/>
+  		<constructor-arg name="databaseName" value="poc_portal_iti"/>
+	</bean>
 
-    <import resource="classpath:property-configurer.xml"/>
-
-   
 </beans>

@@ -16,5 +16,5 @@
 	<bean id="SelectAPIFromAPIListCommand" class="roteador.service.command.SelectAPIFromAPIListCommand"/>
 	<bean id="SearchAPIVersionCommand" class="roteador.service.command.SearchAPIVersionCommand"/>
 	<bean id="SearchAPIVersionDocumentationCommand" class="roteador.service.command.SearchAPIVersionDocumentationCommand"/>
-
+    <bean id="GravarOrganizacoesCommand" class="roteador.service.command.GravarOrganizacoesCommand"/>
 </beans>

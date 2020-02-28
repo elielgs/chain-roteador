@@ -9,6 +9,7 @@
 		<constructor-arg>
 			<list>
 				<value>cep/service/chain/processo/xml/processFindAPIById.xml</value>
+				<value>cep/service/chain/processo/xml/processSalvarOrganizacoes.xml</value>
 			</list>
 		</constructor-arg>
 <!-- 		<property name="transactionManager" ref="txManagerCep"/> -->

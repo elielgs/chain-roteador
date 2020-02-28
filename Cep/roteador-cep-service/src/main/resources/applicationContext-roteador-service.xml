@@ -9,5 +9,6 @@
     <import resource="classpath:dao-roteador-service.xml"/>
     <import resource="classpath:command-roteador-service.xml"/>
     <import resource="classpath:chain-roteador-service.xml"/>
+    <import resource="classpath:applicationContext-roteador-mongodb-connection.xml"/>
 	<!--  >import resource="classpath:applicationContext-ecatalogue-mysql-connection.xml"/-->
 </beans>

@@ -8,11 +8,6 @@ import roteador.core.exception.dao.DeleteException;
 import roteador.core.exception.dao.FindException;
 import roteador.core.exception.dao.UpdateException;
 
-/**
- * 
- * @author Mauricio Santos
- *
- */
 public interface InterfaceDAO <T> {
 
 
