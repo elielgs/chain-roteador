@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.commons.chain.Context;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import roteador.core.constants.ECatalogueContextKey;
+import roteador.core.constants.ContextKey;
 import roteador.service.dao.MongoDBDAO;
 import roteador.service.mongo.model.MembroOrganizacao;
 
@@ -80,8 +80,8 @@ public class GravarOrganizacoesCommand extends AbstractMongodbConnectionCommand 
 		list[3] = pri;
 		list[4] = tico;
 		list[5] = ze;
-		context.put(ECatalogueContextKey.JSON_PARSE_FROM_OBJECT, ECatalogueContextKey.ORGANIZACOES);
-		context.put(ECatalogueContextKey.ORGANIZACOES, list);
+		context.put(ContextKey.JSON_PARSE_FROM_OBJECT, ContextKey.ORGANIZACOES);
+		context.put(ContextKey.ORGANIZACOES, list);
 
 		// Find
 //		p = mongoDBDAO.findById(MembroOrganizacao.class, p.getId());

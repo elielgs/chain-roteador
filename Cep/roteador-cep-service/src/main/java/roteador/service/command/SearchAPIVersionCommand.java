@@ -9,7 +9,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 
-import roteador.core.constants.ECatalogueContextKey;
+import roteador.core.constants.ContextKey;
 import roteador.entities.APIVersionDTO;
 import roteador.entities.ApiDTO;
 
@@ -17,8 +17,8 @@ public class SearchAPIVersionCommand extends AbstractAPIConnectionCommand {
 
 	@Override
 	public boolean execute(Context context) throws Exception {
-		ApiDTO apiDTO = (ApiDTO)context.get(ECatalogueContextKey.API_DTO);
-		String idAPI = (String)context.get(ECatalogueContextKey.API_ID);
+		ApiDTO apiDTO = (ApiDTO)context.get(ContextKey.API_DTO);
+		String idAPI = (String)context.get(ContextKey.API_ID);
 		StringBuffer uri = new StringBuffer();
 		uri.append("/api/").append(idAPI).append("/versao");
 		

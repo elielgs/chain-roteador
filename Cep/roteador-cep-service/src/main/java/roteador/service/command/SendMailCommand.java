@@ -5,7 +5,7 @@ import org.apache.commons.chain.Context;
 import org.apache.log4j.Logger;
 
 import roteador.core.command.AbstractBaseCommand;
-import roteador.core.constants.ECatalogueContextKey;
+import roteador.core.constants.ContextKey;
 
 public class SendMailCommand extends AbstractBaseCommand {
 

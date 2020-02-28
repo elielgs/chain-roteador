@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import roteador.chain.Chain;
 import roteador.core.ContextECatalogue;
-import roteador.core.constants.ECatalogueContextKey;
+import roteador.core.constants.ContextKey;
 import roteador.core.exception.command.CommandException;
 import roteador.service.ServiceMain;
 
@@ -21,12 +21,12 @@ public class ServiceController {
 		String retorno = "";
 		Chain chain = (Chain)ServiceMain.getApplicationContext().getBean("Chain");
 		ContextECatalogue contextEcatalogue = new ContextECatalogue();
-		contextEcatalogue.put(ECatalogueContextKey.TRANSACTION.getChave(), "findAPIById");
-		contextEcatalogue.put(ECatalogueContextKey.API_ID, id);
-		contextEcatalogue.put(ECatalogueContextKey.JSON_PARSE_FROM_OBJECT, ECatalogueContextKey.API_DTO);
+		contextEcatalogue.put(ContextKey.TRANSACTION.getChave(), "findAPIById");
+		contextEcatalogue.put(ContextKey.API_ID, id);
+		contextEcatalogue.put(ContextKey.JSON_PARSE_FROM_OBJECT, ContextKey.API_DTO);
 		try {
 			chain.execute(contextEcatalogue);
-			retorno = (String)contextEcatalogue.get(ECatalogueContextKey.JSON_OBJECT);
+			retorno = (String)contextEcatalogue.get(ContextKey.JSON_OBJECT);
 		} catch (CommandException e) {
 			retorno = e.getMensagem().getChave();
 			e.printStackTrace();
@@ -42,11 +42,11 @@ public class ServiceController {
 		String retorno = "";
 		Chain chain = (Chain)ServiceMain.getApplicationContext().getBean("Chain");
 		ContextECatalogue contextEcatalogue = new ContextECatalogue();
-		contextEcatalogue.put(ECatalogueContextKey.TRANSACTION.getChave(), "salvarOrganizacoes");
-		contextEcatalogue.put(ECatalogueContextKey.JSON_PARSE_FROM_OBJECT, ECatalogueContextKey.ORGANIZACOES);
+		contextEcatalogue.put(ContextKey.TRANSACTION.getChave(), "salvarOrganizacoes");
+		contextEcatalogue.put(ContextKey.JSON_PARSE_FROM_OBJECT, ContextKey.ORGANIZACOES);
 		try {
 			chain.execute(contextEcatalogue);
-			retorno = (String)contextEcatalogue.get(ECatalogueContextKey.JSON_OBJECT);
+			retorno = (String)contextEcatalogue.get(ContextKey.JSON_OBJECT);
 		} catch (CommandException e) {
 			retorno = e.getMensagem().getChave();
 			e.printStackTrace();

@@ -19,7 +19,7 @@ import org.xml.sax.helpers.XMLReaderFactory;
 
 import roteador.chain.processo.Processo;
 import roteador.chain.processo.ProcessoParser;
-import roteador.core.constants.ECatalogueContextKey;
+import roteador.core.constants.ContextKey;
 import roteador.core.exception.command.CommandException;
 import roteador.core.exception.command.TransactionNotFoundException;
 import roteador.core.exception.service.ServiceException;
@@ -110,9 +110,9 @@ public class Chain implements Command, BeanFactoryAware {
      */
     @SuppressWarnings("unchecked")
     private boolean executarProcesso(final Context ctx) throws TransactionNotFoundException, CommandException, Exception {
-        String transacao = (String) ctx.get(ECatalogueContextKey.TRANSACTION.getChave());
+        String transacao = (String) ctx.get(ContextKey.TRANSACTION.getChave());
         try{
-            ctx.remove(ECatalogueContextKey.EXCEPTION.getChave());
+            ctx.remove(ContextKey.EXCEPTION.getChave());
         }catch (final Exception e) {
             LOG.error("ERRO AO REMOVER A CHAVE EXCECAO DO CONTEXTO >>>> " + transacao + " NO SERVIDOR.");
         }
@@ -127,12 +127,12 @@ public class Chain implements Command, BeanFactoryAware {
         try {
         	executor.executarProcesso(processo);
         } catch (final TransactionExecutionException e) {
-            ctx.put(ECatalogueContextKey.EXCEPTION.getChave(), e);
+            ctx.put(ContextKey.EXCEPTION.getChave(), e);
         } catch (final CommandException e) {
-            ctx.remove(ECatalogueContextKey.COMMAND_EXCEPTION.getChave());
+            ctx.remove(ContextKey.COMMAND_EXCEPTION.getChave());
             throw e;
         } catch (final ServiceException e) {
-            ctx.remove(ECatalogueContextKey.SERVICE_EXCEPTION.getChave());
+            ctx.remove(ContextKey.SERVICE_EXCEPTION.getChave());
             throw e;
         } catch (final Exception e) {
             LOG.error("ERRO NA EXECUCAO DE COMMAND NO PROCESSO (" + processo.getNome() + ")", e);

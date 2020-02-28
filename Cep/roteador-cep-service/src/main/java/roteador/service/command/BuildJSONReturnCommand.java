@@ -5,15 +5,15 @@ import org.apache.commons.chain.Context;
 
 import com.google.gson.Gson;
 
-import roteador.core.constants.ECatalogueContextKey;
+import roteador.core.constants.ContextKey;
 
 public class BuildJSONReturnCommand implements Command {
 
 	@Override
 	public boolean execute(Context context) throws Exception {
-		ECatalogueContextKey keyFromObject = (ECatalogueContextKey) context.get(ECatalogueContextKey.JSON_PARSE_FROM_OBJECT);
+		ContextKey keyFromObject = (ContextKey) context.get(ContextKey.JSON_PARSE_FROM_OBJECT);
 		Gson gson = new Gson();
-		context.put(ECatalogueContextKey.JSON_OBJECT, gson.toJson(context.get(keyFromObject)));
+		context.put(ContextKey.JSON_OBJECT, gson.toJson(context.get(keyFromObject)));
 		
 		return true;
 	}

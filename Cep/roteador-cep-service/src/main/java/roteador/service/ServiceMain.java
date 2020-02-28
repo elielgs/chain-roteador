@@ -18,7 +18,7 @@ import org.springframework.web.client.RestTemplate;
 
 import roteador.chain.Chain;
 import roteador.core.ContextECatalogue;
-import roteador.core.constants.ECatalogueContextKey;
+import roteador.core.constants.ContextKey;
 
 @SpringBootApplication
 @ImportResource({"classpath*:applicationContext-roteador-service.xml"})

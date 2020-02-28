@@ -9,7 +9,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 
-import roteador.core.constants.ECatalogueContextKey;
+import roteador.core.constants.ContextKey;
 import roteador.entities.ApiDTO;
 
 public class SearchAPIsListCommand extends AbstractAPIConnectionCommand {
@@ -24,7 +24,7 @@ public class SearchAPIsListCommand extends AbstractAPIConnectionCommand {
 	    Map<String, String> params = new HashMap<String, String>();
 	 
 	    ResponseEntity<ApiDTO[]> result = super.send("/apis/list", HttpMethod.GET, requestEntity, params, ApiDTO[].class);
-	    context.put(ECatalogueContextKey.API_LIST, result.getBody());
+	    context.put(ContextKey.API_LIST, result.getBody());
 	    return true;
 	}
 

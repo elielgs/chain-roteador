@@ -1,7 +1,7 @@
 package roteador.core.constants;
 
 
-public enum ECatalogueContextKey {
+public enum ContextKey {
 	
 
 	CONTEXT("CONTEXT"),
@@ -30,7 +30,7 @@ public enum ECatalogueContextKey {
 
     private String chave;
 
-    private ECatalogueContextKey(final String chave) {
+    private ContextKey(final String chave) {
         this.chave = chave;
     }
 
