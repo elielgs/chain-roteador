@@ -17,18 +17,23 @@ public class FilterAPIVersionStatusCommand implements Command {
 		String statusFilter = (String) context.get(ContextKey.API_VERSION_STATUS_LIST);
 		APIVersionDTO[] apiVersionDTOList = (APIVersionDTO[]) context.get(ContextKey.API_VERSION_LIST);
 
-		APIVersionDTO[] filteredAPIVersionDTOArray = new APIVersionDTO[apiVersionDTOList.length];
-		int returnIndex = 0;
+		List<APIVersionDTO> filteredAPIVersionDTOList = new ArrayList<APIVersionDTO>();
 		
 		for (int i = 0; i < apiVersionDTOList.length; i++) {
 			APIVersionDTO apiVersionDTO = apiVersionDTOList[i];
 			if (apiVersionDTO.getStatus().equals(statusFilter)) {
-				filteredAPIVersionDTOArray[returnIndex++] = apiVersionDTO;
+				filteredAPIVersionDTOList.add(apiVersionDTO);
 			}
 		}
 
+		Iterator<APIVersionDTO> iterator = filteredAPIVersionDTOList.iterator();
+		APIVersionDTO[] filteredAPIVersionDTOArray = new APIVersionDTO[filteredAPIVersionDTOList.size()];
+		int index = 0;
+		while (iterator.hasNext()) {
+			filteredAPIVersionDTOArray[index++] = iterator.next();
+		}
+		
 		context.put(ContextKey.API_VERSION_LIST, filteredAPIVersionDTOArray);
 		return true;
 	}
-
 }
