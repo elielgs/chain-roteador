@@ -10,21 +10,13 @@ public class ApiDTO implements Serializable {
 	private String title;
 	private String description;
 	private boolean active;
-	private APIVersionDTO apiVersionDTO;
-	private APIVersionDocumentationDTO apiVersionDocumentationDTO; 
+	private APIVersionDTO[] apiVersionDTO;
 	
 	
-	
-	public APIVersionDocumentationDTO getApiVersionDocumentationDTO() {
-		return apiVersionDocumentationDTO;
-	}
-	public void setApiVersionDocumentationDTO(APIVersionDocumentationDTO apiVersionDocumentationDTO) {
-		this.apiVersionDocumentationDTO = apiVersionDocumentationDTO;
-	}
-	public APIVersionDTO getApiVersionDTO() {
+	public APIVersionDTO[] getApiVersionDTO() {
 		return apiVersionDTO;
 	}
-	public void setApiVersionDTO(APIVersionDTO apiVersionDTO) {
+	public void setApiVersionDTO(APIVersionDTO[] apiVersionDTO) {
 		this.apiVersionDTO = apiVersionDTO;
 	}
 	public String getId() {

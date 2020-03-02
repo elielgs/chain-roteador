@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<processo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="processo.xsd" nome="findAPIsByUser"
+	inicio="SearchAPIsByOrganizationCommand">
+	
+
+    <sequencia executa="SearchAPIsByOrganizationCommand">
+	    <resultado tipo="true" proximo="SearchAPIsByUserCommand"/>
+	    <resultado tipo="false">
+	            <excecao tipo="COMMAND" construcao="MN001" />
+	    </resultado>
+     </sequencia>
+     <sequencia executa="SearchAPIsByUserCommand"/>
+</processo>

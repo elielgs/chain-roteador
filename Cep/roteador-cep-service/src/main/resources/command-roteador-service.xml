@@ -15,6 +15,10 @@
 	<bean id="BuildJSONReturnCommand" class="roteador.service.command.BuildJSONReturnCommand"/>
 	<bean id="SelectAPIFromAPIListCommand" class="roteador.service.command.SelectAPIFromAPIListCommand"/>
 	<bean id="SearchAPIVersionCommand" class="roteador.service.command.SearchAPIVersionCommand"/>
+	<bean id="CheckAPIVersionStatusParameterCommand" class="roteador.service.command.CheckAPIVersionStatusParameterCommand"/>
+	<bean id="FilterAPIVersionStatusCommand" class="roteador.service.command.FilterAPIVersionStatusCommand"/>
 	<bean id="SearchAPIVersionDocumentationCommand" class="roteador.service.command.SearchAPIVersionDocumentationCommand"/>
     <bean id="GravarOrganizacoesCommand" class="roteador.service.command.GravarOrganizacoesCommand"/>
+    <bean id="SearchAPIsByOrganizationCommand" class="roteador.service.command.SearchAPIsByOrganizationCommand"/>
+    <bean id="SearchAPIsByUserCommand" class="roteador.service.command.SearchAPIsByUserCommand"/>
 </beans>

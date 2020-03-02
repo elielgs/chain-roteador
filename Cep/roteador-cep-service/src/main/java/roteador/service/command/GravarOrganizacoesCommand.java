@@ -12,9 +12,6 @@ import roteador.service.mongo.model.MembroOrganizacao;
 
 public class GravarOrganizacoesCommand extends AbstractMongodbConnectionCommand {
 
-	@Autowired
-	private MongoDBDAO<MembroOrganizacao> mongoDBDAO;
-
 	private static String API_PRECO = "Preco";
 	private static String API_PRODUTO = "Produto";
 	private static String API_OFERTA = "Oferta";
@@ -80,8 +77,8 @@ public class GravarOrganizacoesCommand extends AbstractMongodbConnectionCommand 
 		list[3] = pri;
 		list[4] = tico;
 		list[5] = ze;
-		context.put(ContextKey.JSON_PARSE_FROM_OBJECT, ContextKey.ORGANIZACOES);
-		context.put(ContextKey.ORGANIZACOES, list);
+		context.put(ContextKey.JSON_PARSE_FROM_OBJECT, ContextKey.MEMBRO_ORGANIZACAO);
+		context.put(ContextKey.MEMBRO_ORGANIZACAO, list);
 
 		// Find
 //		p = mongoDBDAO.findById(MembroOrganizacao.class, p.getId());

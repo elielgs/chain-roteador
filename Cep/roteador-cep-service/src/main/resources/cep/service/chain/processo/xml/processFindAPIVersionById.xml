@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<processo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="processo.xsd" nome="findAPIsVersionById"
+	inicio="SearchAPIVersionCommand">
+	
+    <sequencia executa="SearchAPIVersionCommand">
+		<resultado tipo="false">
+            <excecao tipo="COMMAND" construcao="MN003" />
+        </resultado>
+       	<resultado tipo="true" proximo="CheckAPIVersionStatusParameterCommand"/>
+    </sequencia>
+    <sequencia executa="CheckAPIVersionStatusParameterCommand">
+        <resultado tipo="true" proximo="FilterAPIVersionStatusCommand"/>
+   	</sequencia>
+   	<sequencia executa="FilterAPIVersionStatusCommand" />
+</processo>

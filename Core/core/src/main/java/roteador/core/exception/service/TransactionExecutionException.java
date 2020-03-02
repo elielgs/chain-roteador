@@ -1,6 +1,6 @@
 package roteador.core.exception.service;
 
-import roteador.core.constants.ECatalogueTransaction;
+import roteador.core.constants.Transaction;
 
 /**
  * 
@@ -15,9 +15,9 @@ public class TransactionExecutionException extends Exception {
 		// TODO Auto-generated constructor stub
 	}
 	
-    private ECatalogueTransaction transaction = null;
+    private Transaction transaction = null;
 
-    public TransactionExecutionException(ECatalogueTransaction transaction) {
+    public TransactionExecutionException(Transaction transaction) {
         super();
         this.transaction = transaction;
     }
@@ -26,7 +26,7 @@ public class TransactionExecutionException extends Exception {
      * 
      * @return
      */
-    public ECatalogueTransaction getTransactionEcatalogue(){
+    public Transaction getTransactionEcatalogue(){
         return this.transaction;
     }
 

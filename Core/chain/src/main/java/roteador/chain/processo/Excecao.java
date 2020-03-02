@@ -2,7 +2,7 @@ package roteador.chain.processo;
 
 import org.apache.log4j.Logger;
 
-import roteador.core.constants.ECatalogueTransaction;
+import roteador.core.constants.Transaction;
 import roteador.core.constants.SystemMessage;
 import roteador.core.exception.command.CommandException;
 import roteador.core.exception.service.ServiceException;
@@ -44,7 +44,7 @@ public class Excecao {
         if (tipo.equals(TIPO_COMMAND)) {
             throw new CommandException(SystemMessage.valueOf(construcao));
         } else if (tipo.equals(TIPO_EXECUCAO_TRANSACAO)) {
-            throw new TransactionExecutionException(ECatalogueTransaction.valueOf(construcao));
+            throw new TransactionExecutionException(Transaction.valueOf(construcao));
         } else if (tipo.equals(TIPO_SERVICE)) {
             throw new ServiceException(SystemMessage.valueOf(construcao));
         } else {

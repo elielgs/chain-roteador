@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 
 import roteador.core.constants.ContextKey;
 import roteador.entities.APIVersionDocumentationDTO;
-import roteador.entities.ApiDTO;
 
 public class SearchAPIVersionDocumentationCommand extends AbstractCMSConnectionCommand {
 
@@ -20,20 +19,19 @@ public class SearchAPIVersionDocumentationCommand extends AbstractCMSConnectionC
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Content-Type", "application/json");
 		headers.set("cache-control", "no-cache");
-		headers.set("postman-token", "29a7b988-6e94-5648-2828-445eaea42320");
 	 
-		ApiDTO apiDTO = (ApiDTO)context.get(ContextKey.API_DTO);
 		String idAPI = (String)context.get(ContextKey.API_ID);	
+		String version = (String)context.get(ContextKey.API_VERSION);
 		StringBuffer uri = new StringBuffer();
-		uri.append("/docs/").append(idAPI).append("/").append(apiDTO.getApiVersionDTO().getVersion()).append("?_format=json");
+		uri.append("/docs/").append(idAPI).append("/").append(version).append("?_format=json");
 		
 	    HttpEntity<String> requestEntity = new HttpEntity<>(headers);
 	 
 	    ResponseEntity<APIVersionDocumentationDTO[]> result = super.send(uri.toString(), HttpMethod.GET, requestEntity, APIVersionDocumentationDTO[].class);
 	    
 	    APIVersionDocumentationDTO apiVersionDocumentationDTO = result.getBody()[0];
-	    apiDTO.setApiVersionDocumentationDTO(apiVersionDocumentationDTO);
-		return true;
+	    context.put(ContextKey.DOCUMENTATION_VERSION, apiVersionDocumentationDTO);
+		return apiVersionDocumentationDTO != null;
 	}
 
 }
