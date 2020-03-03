@@ -4,6 +4,5 @@
 	inicio="GravarOrganizacoesCommand">
 	
 
-    <sequencia executa="GravarOrganizacoesCommand" proximo="BuildJSONReturnCommand"/>
- 	<sequencia executa="BuildJSONReturnCommand"/>
+    <sequencia executa="GravarOrganizacoesCommand" />
 </processo>

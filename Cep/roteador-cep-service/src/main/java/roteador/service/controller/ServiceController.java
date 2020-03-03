@@ -25,18 +25,15 @@ import roteador.service.ServiceMain;
 @RestController
 public class ServiceController {
 	
-	@RequestMapping(value="/buscarapi/{id}", method = RequestMethod.GET)
-	public String buscarDescricao(@PathVariable("id") String id) {
+	@RequestMapping(value="/salvarorganizacoes", method = RequestMethod.GET)
+	public String salvarOrganizacoes() {
 
 		String retorno = "";
 		Chain chain = (Chain)ServiceMain.getApplicationContext().getBean("Chain");
 		ContextECatalogue contextEcatalogue = new ContextECatalogue();
-		contextEcatalogue.put(ContextKey.TRANSACTION.getChave(), "findAPIById");
-		contextEcatalogue.put(ContextKey.API_ID, id);
-		contextEcatalogue.put(ContextKey.JSON_PARSE_FROM_OBJECT, ContextKey.API_DTO);
+		contextEcatalogue.put(ContextKey.TRANSACTION.getChave(), Transaction.SALVAR_ORGANIZACOES.getChave());
 		try {
 			chain.execute(contextEcatalogue);
-			retorno = (String)contextEcatalogue.get(ContextKey.JSON_OBJECT);
 		} catch (CommandException e) {
 			retorno = e.getMensagem().getChave();
 			e.printStackTrace();

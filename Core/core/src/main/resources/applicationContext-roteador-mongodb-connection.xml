@@ -9,8 +9,11 @@
           http://www.springframework.org/schema/beans
           https://www.springframework.org/schema/beans/spring-beans.xsd">
 
+
+	<import resource="classpath:property-configurer.xml"/>
+	
     <!-- Default bean name is 'mongo' -->
-    <mongo:mongo-client host="localhost" port="27017"/>
+    <mongo:mongo-client host="${mongodb.hostname}" port="${mongodb.port}"/>
 
 	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
   		<constructor-arg ref="mongoClient"/>

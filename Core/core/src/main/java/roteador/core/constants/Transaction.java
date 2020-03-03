@@ -6,7 +6,8 @@ import java.util.List;
 public enum Transaction {
 
     FIND_APIS_BY_USER("findAPIsByUser"),
-    FIND_APIS_VERSION_BY_ID("findAPIsVersionById")
+    FIND_APIS_VERSION_BY_ID("findAPIsVersionById"),
+    SALVAR_ORGANIZACOES("salvarOrganizacoes")
     ;
 
     private String chave;
