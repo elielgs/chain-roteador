@@ -2,10 +2,9 @@ package roteador.service.controller;
 
 import java.util.List;
 
-import org.springframework.data.repository.query.ReturnedType;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -43,6 +42,7 @@ public class ServiceController {
 		return retorno;
 	}
 	
+	@CrossOrigin(origins = "*")
 	@RequestMapping(value="/api/list", method = RequestMethod.GET)
 	public ResponseEntity<ReturnDTO<List<ApiDTO>>> listApis(@RequestParam String email) {
 
@@ -69,6 +69,7 @@ public class ServiceController {
 		return ResponseEntity.status(httpStatusReturn).body(returnDTO);
 	}
 	
+	@CrossOrigin(origins = "*")
 	@RequestMapping(value="/api/version/{id}", method = RequestMethod.GET)
 	public ResponseEntity<ReturnDTO<APIVersionDTO[]>> apiVersion(@PathVariable String id,
 			@RequestParam(required = false) String status) {
