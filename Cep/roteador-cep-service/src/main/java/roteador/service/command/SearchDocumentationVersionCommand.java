@@ -23,7 +23,7 @@ public class SearchDocumentationVersionCommand extends AbstractAPIConnectionComm
 		
 	    HttpEntity<String> requestEntity = new HttpEntity<>(headers);
 	 
-	    ResponseEntity<String> result = super.send(uri.toString(), HttpMethod.GET, requestEntity, String.class);
+	    ResponseEntity<String> result = super.send(uri.toString(), HttpMethod.GET, requestEntity, null, String.class);
 	    
 	    String documentationVersion = result.getBody();
 	    context.put(ContextKey.DOCUMENTATION_VERSION, documentationVersion);

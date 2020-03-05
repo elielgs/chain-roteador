@@ -133,8 +133,8 @@ public class ServiceController {
 	}
 
 	@CrossOrigin(origins = "*")
-	@RequestMapping(value="/api/docs/{document}/{version}", method = RequestMethod.GET)
-	public ResponseEntity<ReturnDTO<APIVersionDocumentationDTO>> apiDocuments(@PathVariable String document,
+	@RequestMapping(value="/api/docs/{id}/{version}", method = RequestMethod.GET)
+	public ResponseEntity<ReturnDTO<APIVersionDocumentationDTO>> apiDocuments(@PathVariable String id,
 																 @PathVariable String version) {
 
 		ReturnDTO<APIVersionDocumentationDTO> returnDTO = new ReturnDTO<APIVersionDocumentationDTO>();
@@ -145,9 +145,6 @@ public class ServiceController {
 		contextEcatalogue.put(ContextKey.API_ID, id);
 		contextEcatalogue.put(ContextKey.API_VERSION, version);
 
-		if (status != null) {
-			contextEcatalogue.put(ContextKey.API_VERSION_STATUS_LIST, status);
-		}
 
 		try {
 			chain.execute(contextEcatalogue);
