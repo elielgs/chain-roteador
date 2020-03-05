@@ -11,8 +11,13 @@
 				<value>service/chain/processo/xml/processSalvarOrganizacoes.xml
 				</value>
 				<value>service/chain/processo/xml/processFindAPIsByUser.xml</value>
+<<<<<<< Updated upstream
 				<value>service/chain/processo/xml/processFindAPIVersionById.xml
 				</value>
+=======
+				<value>service/chain/processo/xml/processFindAPIVersionById.xml</value>
+				<value>service/chain/processo/xml/processFindDocByAPIVersion.xml</value>
+>>>>>>> Stashed changes
 			</list>
 		</constructor-arg>
 		<!-- <property name="transactionManager" ref="txManagerCep"/> -->

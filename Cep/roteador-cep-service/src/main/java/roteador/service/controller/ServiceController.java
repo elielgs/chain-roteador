@@ -18,6 +18,7 @@ import roteador.core.constants.ContextKey;
 import roteador.core.constants.Transaction;
 import roteador.core.exception.command.CommandException;
 import roteador.entities.APIVersionDTO;
+import roteador.entities.APIVersionDocumentationDTO;
 import roteador.entities.ApiDTO;
 import roteador.entities.ReturnDTO;
 import roteador.service.ServiceMain;
@@ -128,6 +129,40 @@ public class ServiceController {
 			e.printStackTrace();
 		}
 		
+		return ResponseEntity.status(httpStatusReturn).body(returnDTO);
+	}
+
+	@CrossOrigin(origins = "*")
+	@RequestMapping(value="/api/docs/{document}/{version}", method = RequestMethod.GET)
+	public ResponseEntity<ReturnDTO<APIVersionDocumentationDTO>> apiDocuments(@PathVariable String document,
+																 @PathVariable String version) {
+
+		ReturnDTO<APIVersionDocumentationDTO> returnDTO = new ReturnDTO<APIVersionDocumentationDTO>();
+		HttpStatus httpStatusReturn = HttpStatus.OK;
+		Chain chain = (Chain)ServiceMain.getApplicationContext().getBean("Chain");
+		ContextECatalogue contextEcatalogue = new ContextECatalogue();
+		contextEcatalogue.put(ContextKey.TRANSACTION.getChave(), Transaction.FIND_DOCS_BY_VERSION.getChave());
+		contextEcatalogue.put(ContextKey.API_ID, id);
+		contextEcatalogue.put(ContextKey.API_VERSION, version);
+
+		if (status != null) {
+			contextEcatalogue.put(ContextKey.API_VERSION_STATUS_LIST, status);
+		}
+
+		try {
+			chain.execute(contextEcatalogue);
+			APIVersionDocumentationDTO body = (APIVersionDocumentationDTO)contextEcatalogue.get(ContextKey.DOCUMENTATION_VERSION);
+			returnDTO.setBody(body);
+		} catch (CommandException e) {
+			returnDTO.setMessage(e.getMensagem().getChave());
+			httpStatusReturn = HttpStatus.NO_CONTENT;
+			e.printStackTrace();
+		} catch (Exception e) {
+			returnDTO.setMessage(e.getMessage());
+			httpStatusReturn = HttpStatus.INTERNAL_SERVER_ERROR;
+			e.printStackTrace();
+		}
+
 		return ResponseEntity.status(httpStatusReturn).body(returnDTO);
 	}
 

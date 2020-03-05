@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Cep/Cep.iml" filepath="$PROJECT_DIR$/Cep/Cep.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Entities/Entities.iml" filepath="$PROJECT_DIR$/Entities/Entities.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Core/chain/chain.iml" filepath="$PROJECT_DIR$/Core/chain/chain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Core/core/src/main/main.iml" filepath="$PROJECT_DIR$/Core/core/src/main/main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Core/core/src/test/test.iml" filepath="$PROJECT_DIR$/Core/core/src/test/test.iml" />
+    </modules>
+  </component>
+</project>

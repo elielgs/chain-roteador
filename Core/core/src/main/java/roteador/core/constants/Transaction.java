@@ -7,6 +7,7 @@ public enum Transaction {
 
     FIND_APIS_BY_USER("findAPIsByUser"),
     FIND_APIS_VERSION_BY_ID("findAPIsVersionById"),
+    FIND_DOCS_BY_VERSION("findDocsByVersion"),
     SALVAR_ORGANIZACOES("salvarOrganizacoes")
     ;
 

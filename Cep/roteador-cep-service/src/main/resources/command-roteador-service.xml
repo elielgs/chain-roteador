@@ -18,6 +18,7 @@
 	<bean id="CheckAPIVersionStatusParameterCommand" class="roteador.service.command.CheckAPIVersionStatusParameterCommand"/>
 	<bean id="FilterAPIVersionStatusCommand" class="roteador.service.command.FilterAPIVersionStatusCommand"/>
 	<bean id="SearchAPIVersionDocumentationCommand" class="roteador.service.command.SearchAPIVersionDocumentationCommand"/>
+	<bean id="SearchDocumentationVersionCommand" class="roteador.service.command.SearchDocumentationVersionCommand"/>
     <bean id="GravarOrganizacoesCommand" class="roteador.service.command.GravarOrganizacoesCommand"/>
     <bean id="SearchAPIsByOrganizationCommand" class="roteador.service.command.SearchAPIsByOrganizationCommand"/>
     <bean id="SearchAPIsByUserCommand" class="roteador.service.command.SearchAPIsByUserCommand"/>

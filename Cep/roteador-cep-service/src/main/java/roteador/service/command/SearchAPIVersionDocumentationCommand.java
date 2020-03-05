@@ -19,17 +19,17 @@ public class SearchAPIVersionDocumentationCommand extends AbstractCMSConnectionC
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Content-Type", "application/json");
 		headers.set("cache-control", "no-cache");
-	 
-		String idAPI = (String)context.get(ContextKey.API_ID);	
-		String version = (String)context.get(ContextKey.API_VERSION);
+
+		String idAPI = (String)context.get(ContextKey.API_ID);
+		String version = (String)context.get(ContextKey.DOCUMENTATION_VERSION);
 		StringBuffer uri = new StringBuffer();
 		uri.append("/docs/").append(idAPI).append("/").append(version).append("?_format=json");
 		
 	    HttpEntity<String> requestEntity = new HttpEntity<>(headers);
 	 
-	    ResponseEntity<APIVersionDocumentationDTO[]> result = super.send(uri.toString(), HttpMethod.GET, requestEntity, APIVersionDocumentationDTO[].class);
+	    ResponseEntity<APIVersionDocumentationDTO> result = super.send(uri.toString(), HttpMethod.GET, requestEntity, APIVersionDocumentationDTO.class);
 	    
-	    APIVersionDocumentationDTO apiVersionDocumentationDTO = result.getBody()[0];
+	    APIVersionDocumentationDTO apiVersionDocumentationDTO = result.getBody();
 	    context.put(ContextKey.DOCUMENTATION_VERSION, apiVersionDocumentationDTO);
 		return apiVersionDocumentationDTO != null;
 	}

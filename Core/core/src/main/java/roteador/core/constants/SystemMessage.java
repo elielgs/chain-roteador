@@ -2,10 +2,11 @@ package roteador.core.constants;
 
 public enum SystemMessage {
 	
-	MN000("API não encontrada..."),
-	MN001("Organização Não encontrada..."),
+	MN000("API nï¿½o encontrada..."),
+	MN001("Organizaï¿½ï¿½o Nï¿½o encontrada..."),
 	MN002("OK"),
-	MN003("Versões para essa API não encontrada")
+	MN003("Versï¿½es para essa API nï¿½o encontrada"),
+    MN004("DocumentaÃ§Ã£o nÃ£o encontrada")
     ;
 
     private String chave;

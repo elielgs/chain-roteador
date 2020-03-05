@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<processo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		  xsi:noNamespaceSchemaLocation="processo.xsd" nome="findDocsByVersion"
+		  inicio="SearchAPIVersionDocumentationCommand">
+
+	<sequencia executa="SearchDocumentationVersionCommand">
+		<resultado tipo="false">
+			<excecao tipo="COMMAND" construcao="MN004" />
+		</resultado>
+		<resultado tipo="true" proximo="SearchAPIVersionDocumentationCommand"/>
+	</sequencia>
+
+	<sequencia executa="SearchAPIVersionDocumentationCommand">
+		<resultado tipo="false">
+			<excecao tipo="COMMAND" construcao="MN004" />
+		</resultado>
+	</sequencia>
+</processo>
