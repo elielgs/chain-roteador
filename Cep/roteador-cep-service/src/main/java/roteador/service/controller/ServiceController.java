@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import roteador.chain.Chain;
+import roteador.chain.pipeline.Pipeline;
 import roteador.core.ContextECatalogue;
 import roteador.core.constants.ContextKey;
 import roteador.core.constants.Transaction;
@@ -87,6 +88,34 @@ public class ServiceController {
 
 		try {
 			chain.execute(contextEcatalogue);
+			APIVersionDTO[] body = (APIVersionDTO[])contextEcatalogue.get(ContextKey.API_VERSION_LIST);
+			returnDTO.setBody(body);
+		} catch (CommandException e) {
+			returnDTO.setMessage(e.getMensagem().getChave());
+			httpStatusReturn = HttpStatus.NO_CONTENT;
+			e.printStackTrace();
+		} catch (Exception e) {
+			returnDTO.setMessage(e.getMessage());
+			httpStatusReturn = HttpStatus.INTERNAL_SERVER_ERROR;
+			e.printStackTrace();
+		}
+		
+		return ResponseEntity.status(httpStatusReturn).body(returnDTO);
+	}
+	
+	@CrossOrigin(origins = "*")
+	@RequestMapping(value="/testpipeline", method = RequestMethod.GET)
+	public ResponseEntity<ReturnDTO<APIVersionDTO[]>> testPipeline() {
+		ReturnDTO<APIVersionDTO[]> returnDTO = new ReturnDTO<APIVersionDTO[]>();
+		HttpStatus httpStatusReturn = HttpStatus.OK;
+		Pipeline pipeline = (Pipeline)ServiceMain.getApplicationContext().getBean("Pipeline");
+		ContextECatalogue contextEcatalogue = new ContextECatalogue();
+		contextEcatalogue.put(ContextKey.TRANSACTION.getChave(), Transaction.FIND_APIS_VERSION_BY_ID.getChave());
+		contextEcatalogue.put(ContextKey.URL, "/buscaapis/listaApis");
+		contextEcatalogue.put(ContextKey.EMAIL, "fmendes@ciandt.com");
+		
+		try {
+			pipeline.execute(contextEcatalogue);
 			APIVersionDTO[] body = (APIVersionDTO[])contextEcatalogue.get(ContextKey.API_VERSION_LIST);
 			returnDTO.setBody(body);
 		} catch (CommandException e) {

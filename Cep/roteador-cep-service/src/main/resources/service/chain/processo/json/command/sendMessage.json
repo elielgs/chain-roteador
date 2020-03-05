@@ -1,0 +1,23 @@
+{
+   "componentJSONFilename":"sendMessage.json",
+   "id":"sendGetToAXWAY",
+   "executeComponent":"sendMessageAPIAXWAY",
+   "params":{
+      "url":"$URL",
+      "params":"EMAIL",
+      "method": "GET"
+   },
+   "resultados":{
+      "true":{
+         "tipo":true,
+         "proximo":"parse"
+      },
+      "false":{
+         "tipo":false,
+         "excecao":{
+            "tipo":"COMMAND",
+            "construcao":"MN001"
+         }
+      }
+   }
+}

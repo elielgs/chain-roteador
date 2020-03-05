@@ -4,7 +4,7 @@
 	inicio="SearchAPIsByOrganizationCommand">
 	
 
-    <sequencia executa="SearchAPIsByOrganizationCommand">
+    <sequencia executa="SearchAPIsByOrganizationCommand" >
 	    <resultado tipo="true" proximo="SearchAPIsByUserCommand"/>
 	    <resultado tipo="false">
 	            <excecao tipo="COMMAND" construcao="MN001" />

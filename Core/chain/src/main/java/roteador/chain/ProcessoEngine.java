@@ -18,11 +18,6 @@ import roteador.chain.processo.Transacao;
 import roteador.core.exception.command.CommandException;
 import roteador.core.exception.service.TransactionExecutionException;
 
-/**
- * 
- * @author Mauricio Santos
- *
- */
 public class ProcessoEngine {
 
     private final BeanFactory beanContext;

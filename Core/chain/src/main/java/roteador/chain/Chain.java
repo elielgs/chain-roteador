@@ -17,6 +17,8 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLReaderFactory;
 
+import com.google.gson.Gson;
+
 import roteador.chain.processo.Processo;
 import roteador.chain.processo.ProcessoParser;
 import roteador.core.constants.ContextKey;

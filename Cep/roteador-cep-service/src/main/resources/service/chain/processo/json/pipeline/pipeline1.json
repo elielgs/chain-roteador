@@ -1,0 +1,17 @@
+{
+	"name": "findAPIsVersionById",
+	"commandsConfiguration": [
+		{
+			"componentJSONFilename": "sendMessage.json",
+			"resultados": {
+				
+			}
+		},
+		{
+			"componentJSONFilename": "parse.json",
+			"resultados": {
+				
+			}
+		}
+	]
+}

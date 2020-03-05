@@ -1,0 +1,12 @@
+{
+	"componentJSONFilename": "parse.json",
+	"id": "parse",
+	"executeComponent" : "parseReturnedObject",
+	"method" : "parse",
+	"params": {
+		"atributo1": "$CHAVECONTEXTO22"
+	},
+	"resultados": {
+		
+	}
+}
