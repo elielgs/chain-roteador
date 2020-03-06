@@ -8,16 +8,19 @@ import roteador.core.exception.command.ParameterException;
 
 public class ParamHelper {
 	
-	public static String getParam(String param, Map<String, String> params, Context ctx, Boolean required) throws ParameterException {
-		String paramValue = params.get(param);
-		if (paramValue != null) {
-			if (paramValue.startsWith("$")) {
-				paramValue = (String)ctx.get(ContextKey.valueOf(paramValue.replace('$', ' ').trim()));
+	public static Object getParam(String param, Map<String, String> params, Context ctx, Boolean required) throws ParameterException {
+		String paramValueString = params.get(param);
+		Object paramReturn = null;
+		if (paramValueString != null) {
+			if (paramValueString.startsWith("$")) {
+				paramReturn = ctx.get(ContextKey.valueOf(paramValueString.replace('$', ' ').trim()));
+			} else {
+				paramReturn = paramValueString;
 			}
 		}
-		if (required && paramValue == null) {
+		if (required && paramReturn == null) {
 			throw new ParameterException(param);
 		}
-		return  paramValue;
+		return  paramReturn;
 	}
 }

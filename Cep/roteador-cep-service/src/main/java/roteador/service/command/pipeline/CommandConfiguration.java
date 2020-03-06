@@ -11,4 +11,14 @@ public class CommandConfiguration {
 		return new SendMessageAXWAYAPICommand();
 	}
 	
+	@Bean(name = "parseJSONToObject")
+	public ParseJSONToObjectCommand getParseJSONToObjectCommand() {
+		return new ParseJSONToObjectCommand();
+	}
+	
+	@Bean(name = "membroOrganizacaoData")
+	public MembroOrganizacaoDataCommand getMembroOrganizacaoDataCommand() {
+		return new MembroOrganizacaoDataCommand();
+	}
+	
 }

@@ -4,8 +4,8 @@
    "executeComponent":"sendMessageAPIAXWAY",
    "params":{
       "url":"$URL",
-      "params":"EMAIL",
-      "method": "GET"
+      "queryParameters":"$QUERY_PARAMETERS",
+      "method": "get"
    },
    "resultados":{
       "true":{

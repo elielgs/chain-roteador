@@ -88,6 +88,7 @@ public class Pipeline implements Command, BeanFactoryAware {
 					Gson gson = new Gson();
 					JsonReader reader = new JsonReader(new FileReader(file));
 					CommandConfiguration commandComponentConfiguration = gson.fromJson(reader, CommandConfiguration.class);
+					commandConfiguration.setId(commandComponentConfiguration.getId());
 					commandConfiguration.setExecuteComponent(commandComponentConfiguration.getExecuteComponent());
 					commandConfiguration.setParams(commandComponentConfiguration.getParams());
 					commandConfiguration.setProximo(commandComponentConfiguration.getProximo());

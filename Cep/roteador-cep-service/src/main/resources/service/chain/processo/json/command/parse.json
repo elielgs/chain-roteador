@@ -1,10 +1,11 @@
 {
 	"componentJSONFilename": "parse.json",
 	"id": "parse",
-	"executeComponent" : "parseReturnedObject",
+	"executeComponent" : "parseJSONToObject",
 	"method" : "parse",
 	"params": {
-		"atributo1": "$CHAVECONTEXTO22"
+		"json": "$JSON",
+		"objectToParseString": "roteador.entities.ApiDTO"
 	},
 	"resultados": {
 		

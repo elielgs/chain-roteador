@@ -1,6 +1,8 @@
 package roteador.service.controller;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -109,11 +111,14 @@ public class ServiceController {
 	public ResponseEntity<ReturnDTO<APIVersionDTO[]>> testPipeline() {
 		ReturnDTO<APIVersionDTO[]> returnDTO = new ReturnDTO<APIVersionDTO[]>();
 		HttpStatus httpStatusReturn = HttpStatus.OK;
+		Map<String, String> queryParameters = new LinkedHashMap<String, String>();
+		queryParameters.put("nomeAPI", "Preco");
+		
 		Pipeline pipeline = (Pipeline)ServiceMain.getApplicationContext().getBean("Pipeline");
 		ContextECatalogue contextEcatalogue = new ContextECatalogue();
 		contextEcatalogue.put(ContextKey.TRANSACTION.getChave(), Transaction.FIND_APIS_VERSION_BY_ID.getChave());
 		contextEcatalogue.put(ContextKey.URL, "/buscaapis/listaApis");
-		contextEcatalogue.put(ContextKey.EMAIL, "fmendes@ciandt.com");
+		contextEcatalogue.put(ContextKey.QUERY_PARAMETERS, queryParameters);
 		
 		try {
 			pipeline.execute(contextEcatalogue);

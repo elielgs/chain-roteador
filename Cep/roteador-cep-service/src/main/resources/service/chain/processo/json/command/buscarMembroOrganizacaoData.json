@@ -1,0 +1,12 @@
+{
+	"componentJSONFilename": "buscarMembroOrganizacao.json",
+	"id": "buscarMembroOrganizacao",
+	"executeComponent" : "membroOrganizacaoData",
+	"params": {
+		"email": "$EMAIL",
+		"method": "findById"
+	},
+	"resultados": {
+		
+	}
+}
