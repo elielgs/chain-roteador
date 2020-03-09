@@ -1,0 +1,28 @@
+{
+   "componentJSONFilename":"getAPIsDataByAPIsList.json",
+   "id":"getAPIsDataByAPIsList",
+   "executeComponent":"sendMessageAPIAXWAY",
+   "params":{
+      "url":"/apis/list",
+      "queryParametersList":"$MEMBER_APIS_DESC_LIST",
+      "method": "get",
+      "queryParameterListAttributeName": "apiNamesList"
+   },
+	"forwardParams": {
+		"json": "$JSON",
+		"objectToParseString": "[Lroteador.entities.ApiDTO;"
+	},   
+   "resultados":{
+      "true":{
+         "tipo":true,
+         "proximo":"parse"
+      },
+      "false":{
+         "tipo":false,
+         "excecao":{
+            "tipo":"COMMAND",
+            "construcao":"MN001"
+         }
+      }
+   }
+}

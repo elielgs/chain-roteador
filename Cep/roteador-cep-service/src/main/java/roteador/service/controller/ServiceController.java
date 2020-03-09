@@ -48,17 +48,17 @@ public class ServiceController {
 	
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value="/api/list", method = RequestMethod.GET)
-	public ResponseEntity<ReturnDTO<List<ApiDTO>>> listApis(@RequestParam String email) {
+	public ResponseEntity<ReturnDTO<ApiDTO[]>> listApis(@RequestParam String email) {
 
-		ReturnDTO<List<ApiDTO>> returnDTO = new ReturnDTO<List<ApiDTO>>();
+		ReturnDTO<ApiDTO[]> returnDTO = new ReturnDTO<ApiDTO[]>();
 		HttpStatus httpStatusReturn = HttpStatus.OK;
-		Chain chain = (Chain)ServiceMain.getApplicationContext().getBean("Chain");
+		Pipeline chain = (Pipeline)ServiceMain.getApplicationContext().getBean("Pipeline");
 		ContextECatalogue contextEcatalogue = new ContextECatalogue();
 		contextEcatalogue.put(ContextKey.TRANSACTION.getChave(), Transaction.FIND_APIS_BY_USER.getChave());
 		contextEcatalogue.put(ContextKey.EMAIL, email);
 		try {
 			chain.execute(contextEcatalogue);
-			List<ApiDTO> body = (List<ApiDTO>)contextEcatalogue.get(ContextKey.API_LIST);
+			ApiDTO[] body = (ApiDTO[])contextEcatalogue.get(ContextKey.PARSED_JSON);
 			returnDTO.setBody(body);
 		} catch (CommandException e) {
 			returnDTO.setMessage(e.getMensagem().getChave());
@@ -80,18 +80,18 @@ public class ServiceController {
 
 		ReturnDTO<APIVersionDTO[]> returnDTO = new ReturnDTO<APIVersionDTO[]>();
 		HttpStatus httpStatusReturn = HttpStatus.OK;
-		Chain chain = (Chain)ServiceMain.getApplicationContext().getBean("Chain");
+		Pipeline pipeline = (Pipeline)ServiceMain.getApplicationContext().getBean("Pipeline");
 		ContextECatalogue contextEcatalogue = new ContextECatalogue();
 		contextEcatalogue.put(ContextKey.TRANSACTION.getChave(), Transaction.FIND_APIS_VERSION_BY_ID.getChave());
-		contextEcatalogue.put(ContextKey.API_ID, id);
+		contextEcatalogue.put(ContextKey.URL, "/api/version/" + id);
 		
 		if (status != null) {
 			contextEcatalogue.put(ContextKey.API_VERSION_STATUS_LIST, status);
 		}
 
 		try {
-			chain.execute(contextEcatalogue);
-			APIVersionDTO[] body = (APIVersionDTO[])contextEcatalogue.get(ContextKey.API_VERSION_LIST);
+			pipeline.execute(contextEcatalogue);
+			APIVersionDTO[] body = (APIVersionDTO[])contextEcatalogue.get(ContextKey.PARSED_JSON);
 			returnDTO.setBody(body);
 		} catch (CommandException e) {
 			returnDTO.setMessage(e.getMensagem().getChave());
@@ -108,8 +108,8 @@ public class ServiceController {
 	
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value="/testpipeline", method = RequestMethod.GET)
-	public ResponseEntity<ReturnDTO<APIVersionDTO[]>> testPipeline() {
-		ReturnDTO<APIVersionDTO[]> returnDTO = new ReturnDTO<APIVersionDTO[]>();
+	public ResponseEntity<ReturnDTO<ApiDTO>> testPipeline() {
+		ReturnDTO<ApiDTO> returnDTO = new ReturnDTO<ApiDTO>();
 		HttpStatus httpStatusReturn = HttpStatus.OK;
 		Map<String, String> queryParameters = new LinkedHashMap<String, String>();
 		queryParameters.put("nomeAPI", "Preco");
@@ -122,7 +122,7 @@ public class ServiceController {
 		
 		try {
 			pipeline.execute(contextEcatalogue);
-			APIVersionDTO[] body = (APIVersionDTO[])contextEcatalogue.get(ContextKey.API_VERSION_LIST);
+			ApiDTO body = (ApiDTO)contextEcatalogue.get(ContextKey.PARSED_JSON);
 			returnDTO.setBody(body);
 		} catch (CommandException e) {
 			returnDTO.setMessage(e.getMensagem().getChave());

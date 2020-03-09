@@ -11,6 +11,7 @@ public class CommandConfiguration {
 	private String id;
     private String executeComponent;
     private Map<String, String> params;
+    private Map<String, String> forwardParams;
     private String proximo;
     private Map<Boolean, Resultado> resultados = new LinkedHashMap<Boolean, Resultado>();
 
@@ -83,6 +84,12 @@ public class CommandConfiguration {
 	public void setId(String id) {
 		this.id = id;
 	}
-    
 
+	public Map<String, String> getForwardParams() {
+		return forwardParams;
+	}
+
+	public void setForwardParams(Map<String, String> forwardParameters) {
+		this.forwardParams = forwardParameters;
+	}
 }

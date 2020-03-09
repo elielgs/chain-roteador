@@ -19,7 +19,6 @@ import org.springframework.beans.factory.BeanFactoryAware;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 
-import roteador.chain.processo.Processo;
 import roteador.chain.processo.pipeline.CommandConfiguration;
 import roteador.chain.processo.pipeline.PipelineConfiguration;
 import roteador.core.constants.ContextKey;
@@ -91,6 +90,7 @@ public class Pipeline implements Command, BeanFactoryAware {
 					commandConfiguration.setId(commandComponentConfiguration.getId());
 					commandConfiguration.setExecuteComponent(commandComponentConfiguration.getExecuteComponent());
 					commandConfiguration.setParams(commandComponentConfiguration.getParams());
+					commandConfiguration.setForwardParams(commandComponentConfiguration.getForwardParams());
 					commandConfiguration.setProximo(commandComponentConfiguration.getProximo());
 					commandConfiguration.setResultados(commandComponentConfiguration.getResultados());
 					reader.close();

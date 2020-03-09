@@ -48,7 +48,7 @@ public class PipelineEngine {
 //        if(transacaoInicio!=null){
 //            executarTransacao(transacaoInicio);
 //        }else if(sequenciaInicio!=null){
-            executarCommand(commandConfigurationInicio);
+            executarCommand(null, commandConfigurationInicio);
 //        }
 
     }
@@ -162,15 +162,27 @@ public class PipelineEngine {
 
     /**
      * 
-     * @param commandConfiguration
+     * @param nextCommandConfiguration
      * @throws Exception
      */
-    private void executarCommand(final CommandConfiguration commandConfiguration) throws Exception {
-        if (commandConfiguration.getExecuteComponent() != null) {
-            final boolean execucao = executarCommand(commandConfiguration.getExecuteComponent(), this.context, commandConfiguration.getParams());
+    private void executarCommand(final CommandConfiguration previousCommand, final CommandConfiguration nextCommandConfiguration) throws Exception {
+    	this.context.put(ContextKey.PARAMS, nextCommandConfiguration.getParams());
+    	if (previousCommand != null) {
+    		if (previousCommand.getForwardParams() != null) {
+    			Map<String, String> params = (Map<String, String>)this.context.get(ContextKey.PARAMS);
+    			if (params != null) {
+    				params.putAll(previousCommand.getForwardParams());
+    			} else {
+    				this.context.put(ContextKey.PARAMS, previousCommand.getForwardParams());
+    			}
+    		}
+        }
+    	
+    	if (nextCommandConfiguration.getExecuteComponent() != null) {
+            final boolean execucao = executarCommand(nextCommandConfiguration, this.context);
 
-            if(commandConfiguration.getResultados()!=null){
-                for (final Resultado resultado : commandConfiguration.getResultados().values()) {
+            if(nextCommandConfiguration.getResultados()!=null){
+                for (final Resultado resultado : nextCommandConfiguration.getResultados().values()) {
                     if (resultado != null && execucao == resultado.getTipo().booleanValue()) {
 //                        if (resultado.getIncluir() != null) {
 //                            final Processo processoInc = pipelineMap.get(resultado.getIncluir());
@@ -183,7 +195,7 @@ public class PipelineEngine {
 //                            }
 //                        }
                         if (resultado.getProximo() != null) {
-                            executeNextCommand(resultado.getProximo());
+                            executeNextCommand(resultado.getProximo(), nextCommandConfiguration);
                             
                         }
 
@@ -203,15 +215,15 @@ public class PipelineEngine {
 //            executarProcesso(processoInc);
 //            this.pipelineConfiguration = processoPai;
 //        }
-        if (commandConfiguration.getProximo() != null) {
-        	executeNextCommand(commandConfiguration.getProximo());
+        if (nextCommandConfiguration.getProximo() != null) {
+        	executeNextCommand(nextCommandConfiguration.getProximo(), nextCommandConfiguration);
         }
 //        if (commandConfiguration.getTransacao() != null) {
 //            executarTransacao(pipelineConfiguration.getMapTransacoes().get(commandConfiguration.getTransacao()));
 //        }
     }
 
-private void executeNextCommand(final String nextId) throws Exception {
+private void executeNextCommand(final String nextId, final CommandConfiguration actualCommand) throws Exception {
 	List<CommandConfiguration> commandsList = pipelineConfiguration.getCommandsConfiguration();
 	Iterator<CommandConfiguration> iterator = commandsList.iterator();
 	CommandConfiguration nextCommand = null;
@@ -222,7 +234,7 @@ private void executeNextCommand(final String nextId) throws Exception {
 		}
 	}
 	if (nextCommand != null) {
-		executarCommand(nextCommand);	
+		executarCommand(actualCommand, nextCommand);	
 	} else {
 		throw new IllegalStateException("Problemas para encontrar a command id --> " + nextId);
 	}
@@ -236,9 +248,8 @@ private void executeNextCommand(final String nextId) throws Exception {
      * @return
      * @throws Exception
      */
-    private boolean executarCommand(final String commandName, final Context ctx, Map<String, String> params) throws Exception {
-    	ctx.put(ContextKey.PARAMS, params);
-        return ((Command) beanContext.getBean(commandName)).execute(ctx);
+    private boolean executarCommand(final CommandConfiguration commandConfiguration, final Context ctx) throws Exception {
+        return ((Command) beanContext.getBean(commandConfiguration.getExecuteComponent())).execute(ctx);
     }
 
 }

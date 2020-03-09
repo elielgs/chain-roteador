@@ -1,0 +1,23 @@
+{
+	"name": "findAPIsByUser",
+	"commandsConfiguration": [
+		{
+			"componentJSONFilename": "getOrganizationMemberData.json",
+			"resultados": {
+				
+			}
+		},
+		{
+			"componentJSONFilename": "getAPIsDataByAPIsList.json",
+			"resultados": {
+				
+			}
+		},
+		{
+			"componentJSONFilename": "parse.json",
+			"resultados": {
+				
+			}
+		}
+	]
+}

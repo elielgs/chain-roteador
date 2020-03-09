@@ -3,6 +3,7 @@ package roteador.service.command.pipeline;
 import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -35,6 +36,7 @@ public abstract class AbstractAPIConnectionCommand implements Command {
 		String url = (String)ParamHelper.getParam("url", parameters, context,  Boolean.TRUE);
 		String method = (String)ParamHelper.getParam("method", parameters, context,  Boolean.TRUE);
 		Map<String,String> queryParametersMap = (Map<String, String>)ParamHelper.getParam("queryParameters", parameters, context,  Boolean.FALSE);
+		
 		String contentType = (String)ParamHelper.getParam("contentType", parameters, context,  Boolean.FALSE);
 		
 		HttpHeaders headers = new HttpHeaders();
@@ -51,6 +53,12 @@ public abstract class AbstractAPIConnectionCommand implements Command {
 	    	while(iterator.hasNext()) {
 	    		Entry<String, String> entry = iterator.next();
 	    		queryParamsMap.put(entry.getKey(), entry.getValue());
+	    	}
+	    } else {
+	    	List<String> queryParametersList = (List<String>)ParamHelper.getParam("queryParametersList", parameters, context,  Boolean.FALSE);
+	    	if (queryParametersList != null) {
+	    		String queryParameterListAttributeName = (String)ParamHelper.getParam("queryParameterListAttributeName", parameters, context,  Boolean.TRUE);
+	    		queryParamsMap.put(queryParameterListAttributeName, queryParametersList.toString().replace('[',  ' ').replace(']', ' ').replaceAll(" ",""));
 	    	}
 	    }
 	    

@@ -4,8 +4,6 @@
 	"executeComponent" : "parseJSONToObject",
 	"method" : "parse",
 	"params": {
-		"json": "$JSON",
-		"objectToParseString": "roteador.entities.ApiDTO"
 	},
 	"resultados": {
 		

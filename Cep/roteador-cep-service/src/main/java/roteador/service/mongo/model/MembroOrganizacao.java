@@ -1,11 +1,13 @@
 package roteador.service.mongo.model;
 
+import java.util.List;
+
 public class MembroOrganizacao {
 
 	private String id;
 	private String name;
 	private String organizationName;
-	private String[] apis;
+	private List<String> apis;
 
 	public MembroOrganizacao(String id, String name, String organizationName) {
 		this.id = id;
@@ -29,20 +31,22 @@ public class MembroOrganizacao {
 		this.organizationName = organizationName;
 	}
 
-	public String[] getApis() {
-		return apis;
-	}
-
-	public void setApis(String[] apis) {
-		this.apis = apis;
-	}
-
 	public void setId(String id) {
 		this.id = id;
 	}
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	
+	
+	public List<String> getApis() {
+		return apis;
+	}
+
+	public void setApis(List<String> apis) {
+		this.apis = apis;
 	}
 
 	@Override

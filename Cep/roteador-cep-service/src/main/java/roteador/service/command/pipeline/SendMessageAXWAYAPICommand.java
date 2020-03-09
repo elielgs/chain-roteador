@@ -15,7 +15,6 @@ public class SendMessageAXWAYAPICommand extends AbstractAPIConnectionCommand {
 	}
 	@Override
 	protected String getPort() {
-		// TODO Auto-generated method stub
 		return port;
 	}
 

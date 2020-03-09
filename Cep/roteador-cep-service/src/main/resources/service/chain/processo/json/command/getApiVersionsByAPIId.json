@@ -1,0 +1,26 @@
+{
+   "componentJSONFilename":"getApiVersionsByAPIId.json",
+   "id":"getApiVersionsByAPIId",
+   "executeComponent":"sendMessageAPIAXWAY",
+   "params":{
+      "url":"$URL",
+      "method": "get"
+   },
+   "forwardParams": {
+      "json": "$JSON",
+	  "objectToParseString": "[Lroteador.entities.APIVersionDTO;"
+   },
+   "resultados":{
+      "false":{
+         "tipo":false,
+         "excecao":{
+            "tipo":"COMMAND",
+            "construcao":"MN003"
+         }
+      },
+      "true":{
+         "tipo":true,
+         "proximo":"parse"
+      }
+   }
+}

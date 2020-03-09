@@ -22,8 +22,8 @@ public class ParseJSONToObjectCommand implements Command {
 		
 		Gson gson = new Gson();
 		Class<?> klass = Class.forName(objectToParseString);
-		context.put(ContextKey.PARSED_API, gson.fromJson(json, klass));
-		return false;
+		context.put(ContextKey.PARSED_JSON, gson.fromJson(json, klass));
+		return true;
 	}
 
 }

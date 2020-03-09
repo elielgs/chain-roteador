@@ -1,8 +1,8 @@
 {
-	"name": "testePipeline",
+	"name": "findAPIsVersionById",
 	"commandsConfiguration": [
 		{
-			"componentJSONFilename": "sendMessage.json",
+			"componentJSONFilename": "getApiVersionsByAPIId.json",
 			"resultados": {
 				
 			}

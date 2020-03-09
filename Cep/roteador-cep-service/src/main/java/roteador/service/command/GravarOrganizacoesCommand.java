@@ -1,6 +1,7 @@
 package roteador.service.command;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.commons.chain.Context;
@@ -22,43 +23,42 @@ public class GravarOrganizacoesCommand extends AbstractMongodbConnectionCommand 
 	@Override
 	public boolean execute(Context context) throws Exception {
 		MembroOrganizacao eliel = new MembroOrganizacao("eliel@ciandt.com", "Eliel Serrao", "Baccio de Latte");
-		String[] apisEliel = new String[3];
-		apisEliel[0] = API_PRECO;
-		apisEliel[1] = API_PRODUTO;
-		apisEliel[2] = API_OFERTA;
+		List<String> apisEliel = new LinkedList<String>();
+		apisEliel.add(API_PRECO);
+		apisEliel.add(API_PRODUTO);
+		apisEliel.add(API_OFERTA);
 		eliel.setApis(apisEliel);
 		
 		MembroOrganizacao fabi = new MembroOrganizacao("fmendes@ciandt.com", "Fabiana Mendes", "Boticario");
-		String[] apisFabi = new String[2];
-		apisFabi[0] = API_PRECO;
-		apisFabi[1] = API_PRODUTO;
+		List<String>  apisFabi = new LinkedList<String>();
+		apisFabi.add(API_PRECO);
+		apisFabi.add(API_PRODUTO);
 		fabi.setApis(apisFabi);
 		
 		MembroOrganizacao brenof = new MembroOrganizacao("brenof@ciandt.com", "Breno Dias", "Danone");
-		String[] apisBreno = new String[5];
-		apisBreno[0] = API_PRECO;
-		apisBreno[1] = API_PRODUTO;
-		apisBreno[2] = API_OFERTA;
-		apisBreno[3] = API_PAGAMENTO;
-		apisBreno[4] = API_GEOLOCALIZACAO;
+		List<String>  apisBreno = new LinkedList<String>();
+		apisBreno.add(API_PRECO);
+		apisBreno.add(API_PRODUTO);
+		apisBreno.add(API_OFERTA);
+		apisBreno.add(API_PAGAMENTO);
+		apisBreno.add(API_GEOLOCALIZACAO);
 		brenof.setApis(apisBreno);	
 		
 		MembroOrganizacao pri = new MembroOrganizacao("priscilab@ciandt.com", "Priscila Salomao ", "Mary Kay");
-		String[] apisPri = new String[2];
-		apisPri[0] = API_GEOLOCALIZACAO;
-		apisPri[1] = API_FAQ;
+		List<String>  apisPri = new LinkedList<String>();
+		apisPri.add(API_GEOLOCALIZACAO);
+		apisPri.add(API_FAQ);
 		pri.setApis(apisPri);	
-		
 
 		MembroOrganizacao tico = new MembroOrganizacao("tiago@ciandt.com", "Tico ", "Tico Pet");
-		String[] apisTico = new String[1];
-		apisTico[0] = API_PAGAMENTO;
+		List<String>  apisTico = new LinkedList<String>();
+		apisTico.add(API_PAGAMENTO);
 		tico.setApis(apisTico);	
 		
 		MembroOrganizacao ze = new MembroOrganizacao("willianp@ciandt.com", "Ze", "Padaria Seu Ze");
-		String[] apisZe = new String[2];
-		apisZe[0] = API_GEOLOCALIZACAO;
-		apisZe[1] = API_FAQ;
+		List<String>  apisZe = new LinkedList<String>();
+		apisZe.add(API_GEOLOCALIZACAO);
+		apisZe.add(API_FAQ);
 		ze.setApis(apisZe);	
 		
 		

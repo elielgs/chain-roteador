@@ -1,5 +1,6 @@
 package roteador.service.command.pipeline;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
 import org.apache.commons.chain.Command;
@@ -35,13 +36,22 @@ public class MembroOrganizacaoDataCommand implements Command {
 		return false;
 	}
 
-	private boolean findById(Context context) throws ParameterException, FindException {
+	private boolean findById(Context context) throws ParameterException, FindException, SecurityException, NoSuchFieldException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		Map<String, String> parameters = (Map<String, String>)context.get(ContextKey.PARAMS);
 
 		String email = (String)ParamHelper.getParam("email", parameters, context,  Boolean.TRUE);
 		
 		MembroOrganizacao membroOrganizacao = mongoDBDAO.findById(MembroOrganizacao.class, email);
-		context.put(ContextKey.MEMBRO_ORGANIZACAO, membroOrganizacao);
+		//context.put(ContextKey.MEMBRO_ORGANIZACAO, membroOrganizacao);
+		context.put(ContextKey.MEMBER_APIS_DESC_LIST, membroOrganizacao.getApis());
+		
+//		Method[] methods = membroOrganizacao.getClass().getMethods();
+//		for (int i = 0; i< methods.length; i++) {
+//			Method method = methods[i];
+//			if (method.getName().equals("setName")) {
+//				method.invoke(membroOrganizacao, "Teste Eliel");	
+//			}
+//		}
 		return membroOrganizacao != null;
 	}
 }

@@ -22,7 +22,7 @@ public class SearchAPIsByUserCommand extends AbstractAPIConnectionCommand {
 		MembroOrganizacao membroOrganizacao = (MembroOrganizacao)context.get(ContextKey.MEMBRO_ORGANIZACAO);
 		List<ApiDTO> apisList = new ArrayList<ApiDTO>();
 		
-		String[] apisNames = membroOrganizacao.getApis();
+		List<String> apisNames = membroOrganizacao.getApis();
 		
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Content-Type", "application/json");
@@ -31,8 +31,8 @@ public class SearchAPIsByUserCommand extends AbstractAPIConnectionCommand {
 	    Map<String, String> params = new HashMap<String, String>();
 	    
 		
-		for (int i = 0; i< apisNames.length; i++) {
-			String apiName = apisNames[i];
+		for (int i = 0; i< apisNames.size(); i++) {
+			String apiName = apisNames.get(0);
 			params.put("nomeAPI", apiName);
 			ResponseEntity<ApiDTO> result = super.send("/buscaapis/listaApis", HttpMethod.GET, requestEntity, params, ApiDTO.class);
 		    apisList.add(result.getBody());
