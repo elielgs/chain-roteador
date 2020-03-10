@@ -14,7 +14,7 @@ public enum ContextKey {
     RESPONSE("RESPONSE"),
     REQUEST_JSON("REQUEST_JSON"),
     URL("URL"),
-
+    MONGODB_OBJECT("MONGODB_OBJECT"),
    
     
     USER_TO("USER_TO"),
@@ -38,6 +38,7 @@ public enum ContextKey {
     RETURN_BODY_OBJECT("RETURN_BODY_OBJECT"),
     JSON_OBJECT("JSON_OBJECT"),
     MESSAGE("MESSAGE"),
+    OBJECT("OBJECT"),
     API_VERSION_STATUS_LIST("API_VERSION_STATUS_LIST");
 
     private String chave;

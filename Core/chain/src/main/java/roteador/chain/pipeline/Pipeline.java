@@ -50,7 +50,6 @@ public class Pipeline implements Command, BeanFactoryAware {
 				try {
 					JsonReader reader = new JsonReader(new FileReader(file));
 					PipelineConfiguration pipelineConfiguration = gson.fromJson(reader, PipelineConfiguration.class);
-					System.out.println("Pipeline Configuration --> " + gson.toJson(pipelineConfiguration));
 					List<CommandConfiguration> pipelineCommands = pipelineConfiguration
 							.getCommandsConfiguration();
 					Iterator<CommandConfiguration> iterator = pipelineCommands.iterator();
@@ -71,10 +70,6 @@ public class Pipeline implements Command, BeanFactoryAware {
 				}
 			}
 		}
-
-		LOG.info(":::::::: Iniciando o processo de parseamento dos xml's de " + "processos ");
-		LOG.info(":::::::: Finalizando o processo de parseamento dos xml's de " + "processos ");
-
 	}
 
 	private void loadCommandConfigurationFromComponentFile(CommandConfiguration commandConfiguration) {
@@ -93,6 +88,8 @@ public class Pipeline implements Command, BeanFactoryAware {
 					commandConfiguration.setForwardParams(commandComponentConfiguration.getForwardParams());
 					commandConfiguration.setProximo(commandComponentConfiguration.getProximo());
 					commandConfiguration.setResultados(commandComponentConfiguration.getResultados());
+					commandConfiguration.setContextTransform(commandComponentConfiguration.getContextTransform());
+					commandConfiguration.setParameterConstructor(commandComponentConfiguration.getParameterConstructor());
 					reader.close();
 					break;
 				} catch (FileNotFoundException e) {

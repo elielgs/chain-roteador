@@ -9,9 +9,10 @@ public class SearchAPIsByOrganizationCommand extends AbstractMongodbConnectionCo
 
 	@Override
 	public boolean execute(Context context) throws Exception {
-		String email = (String)context.get(ContextKey.EMAIL);
-		MembroOrganizacao membroOrganizacao = mongoDBDAO.findById(MembroOrganizacao.class, email);
-		context.put(ContextKey.MEMBRO_ORGANIZACAO, membroOrganizacao);
-		return membroOrganizacao != null;
+//		String email = (String)context.get(ContextKey.EMAIL);
+//		MembroOrganizacao membroOrganizacao = mongoDBDAO.findById(MembroOrganizacao.class, email);
+//		context.put(ContextKey.MEMBRO_ORGANIZACAO, membroOrganizacao);
+//		return membroOrganizacao != null;
+		return true;
 	}
 }

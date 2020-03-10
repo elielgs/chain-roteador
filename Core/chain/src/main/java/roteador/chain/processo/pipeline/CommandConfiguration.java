@@ -14,6 +14,8 @@ public class CommandConfiguration {
     private Map<String, String> forwardParams;
     private String proximo;
     private Map<Boolean, Resultado> resultados = new LinkedHashMap<Boolean, Resultado>();
+    private ContextTransform contextTransform;
+    private ParameterConstructor parameterConstructor;
 
     public CommandConfiguration() {
         //Construtor
@@ -92,4 +94,22 @@ public class CommandConfiguration {
 	public void setForwardParams(Map<String, String> forwardParameters) {
 		this.forwardParams = forwardParameters;
 	}
+
+	public ContextTransform getContextTransform() {
+		return contextTransform;
+	}
+
+	public void setContextTransform(ContextTransform contextTransform) {
+		this.contextTransform = contextTransform;
+	}
+
+	public ParameterConstructor getParameterConstructor() {
+		return parameterConstructor;
+	}
+
+	public void setParameterConstructor(ParameterConstructor parametersConstructor) {
+		this.parameterConstructor = parametersConstructor;
+	}
+
+
 }

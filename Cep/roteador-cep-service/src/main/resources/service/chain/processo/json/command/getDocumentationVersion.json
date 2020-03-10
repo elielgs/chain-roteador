@@ -1,29 +1,27 @@
 {
-   "componentJSONFilename":"getAPIsDataByAPIsList.json",
-   "id":"getAPIsDataByAPIsList",
+   "componentJSONFilename":"getDocumentationVersion.json",
+   "id":"getDocumentationVersion",
    "executeComponent":"sendMassageAPI",
    "params":{
    	  "domain": "http://ec2-18-229-158-230.sa-east-1.compute.amazonaws.com",
    	  "port": "8083",
-      "url":"/apis/list",
-      "queryParametersList":"$MEMBER_APIS_DESC_LIST",
-      "method": "get",
-      "queryParameterListAttributeName": "apiNamesList"
+      "url":"$URL",
+      "method": "get"
    },
 	"forwardParams": {
 		"json": "$JSON",
-		"objectToParseString": "[Lroteador.entities.ApiDTO;"
-	},   
+		"objectToParseString": "roteador.entities.APIDocumentationVersionDTO"
+	},     
    "resultados":{
       "true":{
          "tipo":true,
-         "proximo":"parse"
+         "proximo":"parseDocumentationVersion"
       },
       "false":{
          "tipo":false,
          "excecao":{
             "tipo":"COMMAND",
-            "construcao":"MN001"
+            "construcao":"MN004"
          }
       }
    }

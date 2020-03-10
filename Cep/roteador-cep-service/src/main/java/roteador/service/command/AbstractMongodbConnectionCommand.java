@@ -11,12 +11,12 @@ import roteador.service.mongo.model.MembroOrganizacao;
 
 public abstract class AbstractMongodbConnectionCommand implements Command {
 	
-	@Autowired
-	protected MongoDBDAO<MembroOrganizacao> mongoDBDAO;
-	
-	public MongoTemplate getMongoTemplate() {
-		return (MongoTemplate)ServiceMain.getApplicationContext().getBean("mongoTemplate");
-	}
+//	@Autowired
+//	protected MongoDBDAO<MembroOrganizacao> mongoDBDAO;
+//	
+//	public MongoTemplate getMongoTemplate() {
+//		return (MongoTemplate)ServiceMain.getApplicationContext().getBean("mongoTemplate");
+//	}
 
 	@Override
 	public abstract boolean execute(Context context) throws Exception;

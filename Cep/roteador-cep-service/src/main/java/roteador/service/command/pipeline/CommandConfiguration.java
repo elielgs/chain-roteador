@@ -6,9 +6,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class CommandConfiguration {
 
-	@Bean(name = "sendMessageAPIAXWAY")
-	public SendMessageAXWAYAPICommand getSendMessageAXWAYAPICommand() {
-		return new SendMessageAXWAYAPICommand();
+	@Bean(name = "sendMassageAPI")
+	public APIConnectorCommand get() {
+		return new APIConnectorCommand();
 	}
 	
 	@Bean(name = "parseJSONToObject")
@@ -16,9 +16,9 @@ public class CommandConfiguration {
 		return new ParseJSONToObjectCommand();
 	}
 	
-	@Bean(name = "membroOrganizacaoData")
-	public MembroOrganizacaoDataCommand getMembroOrganizacaoDataCommand() {
-		return new MembroOrganizacaoDataCommand();
+	@Bean(name = "noSQLDataConnector")
+	public NOSQLDataConnectorCommand getNOSQLDataConnectorCommand() {
+		return new NOSQLDataConnectorCommand();
 	}
 	
 }

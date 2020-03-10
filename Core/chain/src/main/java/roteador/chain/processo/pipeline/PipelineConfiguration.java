@@ -8,7 +8,7 @@ public class PipelineConfiguration {
 
 	private String name;
 
-	private List<CommandConfiguration> commandsConfiguration = new LinkedList<CommandConfiguration>();
+	private LinkedList<CommandConfiguration> commandsConfiguration;
 	
 	public PipelineConfiguration() {
 	}
@@ -25,11 +25,11 @@ public class PipelineConfiguration {
 		this.name = name;
 	}
 
-	public List<CommandConfiguration> getCommandsConfiguration() {
+	public LinkedList<CommandConfiguration> getCommandsConfiguration() {
 		return commandsConfiguration;
 	}
 
-	public void setCommandsConfiguration(List<CommandConfiguration> commandsConfiguration) {
+	public void setCommandsConfiguration(LinkedList<CommandConfiguration> commandsConfiguration) {
 		this.commandsConfiguration = commandsConfiguration;
 	}
 }

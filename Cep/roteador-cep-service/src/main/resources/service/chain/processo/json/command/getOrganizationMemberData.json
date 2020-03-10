@@ -1,13 +1,21 @@
 {
-	"componentJSONFilename": "getOrganizationMemberData.json",
-	"id": "getOrganizationMemberData",
-	"executeComponent" : "membroOrganizacaoData",
-	"params": {
-		"email": "$EMAIL",
-		"method": "findById"
-	},
-	"resultados": {
-		"true":{
+   "componentJSONFilename":"getOrganizationMemberData.json",
+   "id":"getOrganizationMemberData",
+   "executeComponent":"noSQLDataConnector",
+   "params":{
+      "email":"$EMAIL",
+      "objectType":"roteador.service.mongo.model.MembroOrganizacao",
+      "method":"findById"
+   },
+   "contextTransform":{
+      "sourceContextKey":"MONGODB_OBJECT",
+      "transformationObject":[
+         "getApis"
+      ],
+      "destinationContextKey":"MEMBER_APIS_DESC_LIST"
+   },
+   "resultados":{
+      "true":{
          "tipo":true,
          "proximo":"getAPIsDataByAPIsList"
       },
@@ -18,5 +26,5 @@
             "construcao":"MN001"
          }
       }
-	}
+   }
 }

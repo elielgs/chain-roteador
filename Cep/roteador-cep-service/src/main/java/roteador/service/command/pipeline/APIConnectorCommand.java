@@ -24,15 +24,16 @@ import roteador.core.constants.ParamHelper;
 
 
 @ImportResource("application.properties")
-public abstract class AbstractAPIConnectionCommand implements Command {
+public class APIConnectorCommand implements Command {
 
 
 	@Autowired
 	private RestTemplate restTemplate;
 	
 	public boolean execute(Context context) throws Exception {
-
 		Map<String, String> parameters = (Map<String, String>)context.get(ContextKey.PARAMS);
+		String domain = (String)ParamHelper.getParam("domain", parameters, context,  Boolean.TRUE);
+		String port = (String)ParamHelper.getParam("port", parameters, context,  Boolean.TRUE);
 		String url = (String)ParamHelper.getParam("url", parameters, context,  Boolean.TRUE);
 		String method = (String)ParamHelper.getParam("method", parameters, context,  Boolean.TRUE);
 		Map<String,String> queryParametersMap = (Map<String, String>)ParamHelper.getParam("queryParameters", parameters, context,  Boolean.FALSE);
@@ -62,7 +63,7 @@ public abstract class AbstractAPIConnectionCommand implements Command {
 	    	}
 	    }
 	    
-	    ResponseEntity<String> result = send(url, HttpMethod.valueOf(method.toUpperCase()), requestEntity, queryParamsMap, String.class);
+	    ResponseEntity<String> result = send(domain, port, url, HttpMethod.valueOf(method.toUpperCase()), requestEntity, queryParamsMap, String.class);
 		if (result.getStatusCode() == HttpStatus.OK) {
 			context.put(ContextKey.JSON, result.getBody());
 		}
@@ -71,13 +72,15 @@ public abstract class AbstractAPIConnectionCommand implements Command {
 	}
 
 	
-	protected <T> ResponseEntity<T> send(String uri, HttpMethod httpMethod, HttpEntity<String> requestEntity,
+	protected <T> ResponseEntity<T> send(String domain, 
+			String port, 
+			String uri, HttpMethod httpMethod, HttpEntity<String> requestEntity,
 			Map<String, String> params, Class<T> responseType) throws URISyntaxException {
 
 		StringBuffer url = new StringBuffer();
-		url.append(getDomain());
+		url.append(domain);
 		url.append(":");
-		url.append(getPort());
+		url.append(port);
 		url.append(uri);
 		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url.toString());
 		if (params != null && !params.isEmpty()) {
@@ -93,7 +96,4 @@ public abstract class AbstractAPIConnectionCommand implements Command {
 		return result;
 	}
 	
-	protected abstract String getDomain();
-	
-	protected abstract String getPort();
 }

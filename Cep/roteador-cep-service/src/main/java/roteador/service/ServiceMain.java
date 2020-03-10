@@ -34,6 +34,8 @@ import roteador.chain.pipeline.Pipeline;
 import roteador.chain.processo.Excecao;
 import roteador.chain.processo.Resultado;
 import roteador.chain.processo.pipeline.CommandConfiguration;
+import roteador.chain.processo.pipeline.ContextTransform;
+import roteador.chain.processo.pipeline.ParameterConstructor;
 import roteador.chain.processo.pipeline.PipelineConfiguration;
 import roteador.core.ContextECatalogue;
 import roteador.core.constants.ContextKey;
@@ -50,26 +52,6 @@ public class ServiceMain {
 	}
 
 	public static <E> void main(String[] args) throws Exception {
-//		PipelineConfiguration pipelineConfiguration = new PipelineConfiguration();
-//		CommandConfiguration commandConfiguration = new CommandConfiguration();
-//		commandConfiguration.setComponentJSONFilename("arquivo1");
-//		CommandConfiguration commandConfiguration2 = new CommandConfiguration();
-//		commandConfiguration2.setComponentJSONFilename("arquivo2");
-//		List<CommandConfiguration> list = new LinkedList<CommandConfiguration>();
-//		list.add(commandConfiguration);
-//		list.add(commandConfiguration2);
-//		pipelineConfiguration.setCommandsConfiguration(list);
-//		
-//		Gson gson = new Gson();
-//		String pipelineConfigurationJSON = gson.toJson(pipelineConfiguration);
-//		System.out.println(pipelineConfigurationJSON);
-//		
-//		PipelineConfiguration pipelineConfiguration2 = gson.fromJson(pipelineConfigurationJSON, PipelineConfiguration.class);
-//		Iterator<CommandConfiguration> iterator = pipelineConfiguration2.getCommandsConfiguration().iterator();
-//		while(iterator.hasNext()) {
-//			System.out.println(iterator.next().getComponentJSONFilename());
-//		}
-		
 		SpringApplication.run(ServiceMain.class, args);
 	}
 

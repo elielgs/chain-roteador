@@ -1,0 +1,16 @@
+{
+   "componentJSONFilename":"parseDocumentationVersion.json",
+   "id":"parseDocumentationVersion",
+   "executeComponent":"parseJSONToObject",
+   "params":{
+
+   },
+   "contextTransform":{
+      "sourceContextKey":"PARSED_JSON",
+      "transformationObject":[
+         "getVersionDocumentation"
+      ],
+      "destinationContextKey":"DOCUMENTATION_VERSION"
+   },
+   "proximo":"getAPIVersionDocumentation"
+}

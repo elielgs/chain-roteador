@@ -1,5 +1,7 @@
 package roteador.chain.pipeline;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -17,41 +19,39 @@ import roteador.core.constants.ContextKey;
 
 public class PipelineEngine {
 
-    private final BeanFactory beanContext;
+	private final BeanFactory beanContext;
 
-    private final AbstractPlatformTransactionManager transactionManager;
+	private final AbstractPlatformTransactionManager transactionManager;
 
-    private final Context context;
+	private final Context context;
 
-    private Map<String, PipelineConfiguration> pipelineMapConfiguration;
+	private Map<String, PipelineConfiguration> pipelineMapConfiguration;
 
-    private PipelineConfiguration pipelineConfiguration;
+	private PipelineConfiguration pipelineConfiguration;
 
-    private static final Logger LOG = Logger.getLogger(PipelineEngine.class);
+	private static final Logger LOG = Logger.getLogger(PipelineEngine.class);
 
-    public PipelineEngine(final Context context
-    		, final AbstractPlatformTransactionManager txManager
-    		, final BeanFactory beanFactory
-    		, final Map<String, PipelineConfiguration> pipelineMapConfiguration) {
-        this.context = context;
-        this.transactionManager = txManager;
-        this.beanContext = beanFactory;
-        this.pipelineMapConfiguration = pipelineMapConfiguration;
-    }
+	public PipelineEngine(final Context context, final AbstractPlatformTransactionManager txManager,
+			final BeanFactory beanFactory, final Map<String, PipelineConfiguration> pipelineMapConfiguration) {
+		this.context = context;
+		this.transactionManager = txManager;
+		this.beanContext = beanFactory;
+		this.pipelineMapConfiguration = pipelineMapConfiguration;
+	}
 
-    public void executarProcesso(final PipelineConfiguration pipelineConfiguration) throws Exception {
-        this.pipelineConfiguration = pipelineConfiguration;
+	public void executarProcesso(final PipelineConfiguration pipelineConfiguration) throws Exception {
+		this.pipelineConfiguration = pipelineConfiguration;
 //        final Transacao transacaoInicio = pipeline.getMapTransacoes().get(pipeline.getInicio());
-        final CommandConfiguration commandConfigurationInicio = pipelineConfiguration.getCommandsConfiguration().get(0);
-        
-        // Procurar primeiro na lista de transacoes
+		final CommandConfiguration commandConfigurationInicio = pipelineConfiguration.getCommandsConfiguration().get(0);
+
+		// Procurar primeiro na lista de transacoes
 //        if(transacaoInicio!=null){
 //            executarTransacao(transacaoInicio);
 //        }else if(sequenciaInicio!=null){
-            executarCommand(null, commandConfigurationInicio);
+		executarCommand(null, commandConfigurationInicio);
 //        }
 
-    }
+	}
 
 //    private void executarTransacao(final Transacao transacao) throws Exception {
 //        LOG.info("INICIANDO UMA NOVA TRANSACAO");
@@ -82,11 +82,11 @@ public class PipelineEngine {
 //        }
 //    }
 
-    /**
-     * 
-     * @param transacao
-     * @throws Exception
-     */
+	/**
+	 * 
+	 * @param transacao
+	 * @throws Exception
+	 */
 //    private void tratarRetornoTransacao(final Transacao transacao) throws Exception {
 //        final Sucesso sucesso = transacao.getSucesso();
 //
@@ -160,30 +160,21 @@ public class PipelineEngine {
 //        }
 //    }
 
-    /**
-     * 
-     * @param nextCommandConfiguration
-     * @throws Exception
-     */
-    private void executarCommand(final CommandConfiguration previousCommand, final CommandConfiguration nextCommandConfiguration) throws Exception {
-    	this.context.put(ContextKey.PARAMS, nextCommandConfiguration.getParams());
-    	if (previousCommand != null) {
-    		if (previousCommand.getForwardParams() != null) {
-    			Map<String, String> params = (Map<String, String>)this.context.get(ContextKey.PARAMS);
-    			if (params != null) {
-    				params.putAll(previousCommand.getForwardParams());
-    			} else {
-    				this.context.put(ContextKey.PARAMS, previousCommand.getForwardParams());
-    			}
-    		}
-        }
-    	
-    	if (nextCommandConfiguration.getExecuteComponent() != null) {
-            final boolean execucao = executarCommand(nextCommandConfiguration, this.context);
+	/**
+	 * 
+	 * @param nextCommandConfiguration
+	 * @throws Exception
+	 */
+	private void executarCommand(final CommandConfiguration previousCommand,
+			final CommandConfiguration nextCommandConfiguration) throws Exception {
+		configureNextCommand(previousCommand, nextCommandConfiguration);
 
-            if(nextCommandConfiguration.getResultados()!=null){
-                for (final Resultado resultado : nextCommandConfiguration.getResultados().values()) {
-                    if (resultado != null && execucao == resultado.getTipo().booleanValue()) {
+		if (nextCommandConfiguration.getExecuteComponent() != null) {
+			final boolean execucao = executarCommand(nextCommandConfiguration, this.context);
+
+			if (nextCommandConfiguration.getResultados() != null) {
+				for (final Resultado resultado : nextCommandConfiguration.getResultados().values()) {
+					if (resultado != null && execucao == resultado.getTipo().booleanValue()) {
 //                        if (resultado.getIncluir() != null) {
 //                            final Processo processoInc = pipelineMap.get(resultado.getIncluir());
 //                            if (processoInc == null) {
@@ -194,18 +185,18 @@ public class PipelineEngine {
 //                                pipelineConfiguration = processoAnterior;
 //                            }
 //                        }
-                        if (resultado.getProximo() != null) {
-                            executeNextCommand(resultado.getProximo(), nextCommandConfiguration);
-                            
-                        }
+						if (resultado.getProximo() != null) {
+							executeNextCommand(resultado.getProximo(), nextCommandConfiguration);
 
-                        if (resultado.getExcecao() != null) {
-                            resultado.getExcecao().lancar();
-                        }
-                    }
-                }//for resultado
-            }
-        }
+						}
+
+						if (resultado.getExcecao() != null) {
+							resultado.getExcecao().lancar();
+						}
+					}
+				} // for resultado
+			}
+		}
 //        if (commandConfiguration.getIncluir() != null) {
 //            final Processo processoInc = pipelineMap.get(commandConfiguration.getIncluir());
 //            if (processoInc == null) {
@@ -215,41 +206,89 @@ public class PipelineEngine {
 //            executarProcesso(processoInc);
 //            this.pipelineConfiguration = processoPai;
 //        }
-        if (nextCommandConfiguration.getProximo() != null) {
-        	executeNextCommand(nextCommandConfiguration.getProximo(), nextCommandConfiguration);
-        }
+		if (nextCommandConfiguration.getProximo() != null) {
+			executeNextCommand(nextCommandConfiguration.getProximo(), nextCommandConfiguration);
+		}
 //        if (commandConfiguration.getTransacao() != null) {
 //            executarTransacao(pipelineConfiguration.getMapTransacoes().get(commandConfiguration.getTransacao()));
 //        }
-    }
+	}
 
-private void executeNextCommand(final String nextId, final CommandConfiguration actualCommand) throws Exception {
-	List<CommandConfiguration> commandsList = pipelineConfiguration.getCommandsConfiguration();
-	Iterator<CommandConfiguration> iterator = commandsList.iterator();
-	CommandConfiguration nextCommand = null;
-	while(iterator.hasNext()) {
-		CommandConfiguration commandPipeline = iterator.next();
-		if (commandPipeline.getId().equals(nextId)) {
-			nextCommand = commandPipeline;
+	@SuppressWarnings("unchecked")
+	private void configureNextCommand(final CommandConfiguration previousCommand,
+			final CommandConfiguration nextCommandConfiguration) {
+		this.context.put(ContextKey.PARAMS, nextCommandConfiguration.getParams());
+		if (nextCommandConfiguration.getParameterConstructor() != null) {
+			nextCommandConfiguration.getParameterConstructor().setObject(this.context);
+		}
+		if (previousCommand != null) {
+			if (previousCommand.getForwardParams() != null) {
+				Map<String, String> params = (Map<String, String>) this.context.get(ContextKey.PARAMS);
+				if (params != null) {
+					params.putAll(previousCommand.getForwardParams());
+				} else {
+					this.context.put(ContextKey.PARAMS, previousCommand.getForwardParams());
+				}
+			}
 		}
 	}
-	if (nextCommand != null) {
-		executarCommand(actualCommand, nextCommand);	
-	} else {
-		throw new IllegalStateException("Problemas para encontrar a command id --> " + nextId);
-	}
-}
 
-    
-    /**
-     * 
-     * @param commandName
-     * @param ctx
-     * @return
-     * @throws Exception
-     */
-    private boolean executarCommand(final CommandConfiguration commandConfiguration, final Context ctx) throws Exception {
-        return ((Command) beanContext.getBean(commandConfiguration.getExecuteComponent())).execute(ctx);
-    }
+	private void executeNextCommand(final String nextId, final CommandConfiguration actualCommand) throws Exception {
+		List<CommandConfiguration> commandsList = pipelineConfiguration.getCommandsConfiguration();
+		Iterator<CommandConfiguration> iterator = commandsList.iterator();
+		CommandConfiguration nextCommand = null;
+		while (iterator.hasNext()) {
+			CommandConfiguration commandPipeline = iterator.next();
+			if (commandPipeline.getId().equals(nextId)) {
+				nextCommand = commandPipeline;
+			}
+		}
+		if (nextCommand != null) {
+			executarCommand(actualCommand, nextCommand);
+		} else {
+			throw new IllegalStateException("Problemas para encontrar a command id --> " + nextId);
+		}
+	}
+
+	/**
+	 * 
+	 * @param commandName
+	 * @param ctx
+	 * @return
+	 * @throws Exception
+	 */
+	private boolean executarCommand(final CommandConfiguration commandConfiguration, final Context ctx)
+			throws Exception {
+		boolean retorno = ((Command) beanContext.getBean(commandConfiguration.getExecuteComponent())).execute(ctx);
+
+		if (commandConfiguration.getContextTransform() != null) {
+			Object objetoContexto = context
+					.get(ContextKey.valueOf(commandConfiguration.getContextTransform().getSourceContextKey()));
+
+			Object objetoRetorno = getObject(commandConfiguration, ctx, objetoContexto);
+			ctx.put(ContextKey.valueOf(commandConfiguration.getContextTransform().getDestinationContextKey()), objetoRetorno);
+		}
+		return retorno;
+	}
+
+	private Object getObject(CommandConfiguration commandConfiguration, final Context ctx, Object objetoContexto)
+			throws IllegalAccessException, InvocationTargetException {
+		Method[] methods = objetoContexto.getClass().getMethods();
+
+		Object objetoRetorno = objetoContexto;
+
+		Iterator<String> methodDesc = commandConfiguration.getContextTransform().getTransformationObject().iterator();
+		while (methodDesc.hasNext()) {
+			String wishedMethod = methodDesc.next();
+			for (int i = 0; i < methods.length; i++) {
+				Method method = methods[i];
+				if (method.getName().equals(wishedMethod)) {
+					objetoRetorno = method.invoke(objetoContexto);
+					break;
+				}
+			}
+		}
+		return objetoRetorno;
+	}
 
 }

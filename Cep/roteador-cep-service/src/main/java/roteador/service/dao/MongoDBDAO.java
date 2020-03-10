@@ -11,40 +11,45 @@ import roteador.core.exception.dao.DeleteException;
 import roteador.core.exception.dao.FindException;
 import roteador.core.exception.dao.UpdateException;
 
-public class MongoDBDAO<T> implements RoteadorMongoDBDAOInterface<T> {
+public class MongoDBDAO implements RoteadorMongoDBDAOInterface {
 	
 	@Autowired
 	private MongoTemplate mongoTemplate;
 
 	@Override
-	public T insert(T objeto) throws UpdateException, DataAccessException, FindException {
-		mongoTemplate.insert(objeto);
-		return objeto;
-	}
-
-	@Override
-	public T update(T objeto) throws UpdateException, DataAccessException, FindException {
+	public Object insert(Object objeto) throws UpdateException, DataAccessException, FindException {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void remove(T objeto) throws DeleteException {
-		mongoTemplate.remove(objeto);
+	public Object update(Object objeto) throws UpdateException, DataAccessException, FindException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void remove(Object objeto) throws DeleteException {
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public T findById(Class<T> klass, Object chave) throws FindException {
+	public Object findById(Class<?> klass, Object chave) throws FindException {
 		return mongoTemplate.findById(chave, klass);
 	}
 
 	@Override
-	public List<T> findAll(Class<T> klass) throws FindException {
-		return mongoTemplate.findAll(klass);
+	public List<?> findAll(Class<?> klass) throws FindException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public void dropCollection(Class<T> klass) {
-		mongoTemplate.dropCollection(klass);
+	public void dropCollection(Class<?> klass) {
+		// TODO Auto-generated method stub
+		
 	}
+
+
 }

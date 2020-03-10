@@ -1,8 +1,10 @@
 {
    "componentJSONFilename":"getApiVersionsByAPIId.json",
    "id":"getApiVersionsByAPIId",
-   "executeComponent":"sendMessageAPIAXWAY",
+   "executeComponent":"sendMassageAPI",
    "params":{
+      "domain": "http://ec2-18-229-158-230.sa-east-1.compute.amazonaws.com",
+   	  "port": "8083",
       "url":"$URL",
       "method": "get"
    },

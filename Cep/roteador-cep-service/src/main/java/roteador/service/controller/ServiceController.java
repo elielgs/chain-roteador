@@ -142,17 +142,19 @@ public class ServiceController {
 	public ResponseEntity<ReturnDTO<APIVersionDocumentationDTO>> apiDocuments(@PathVariable String id,
 																 @PathVariable String version) {
 
+		StringBuffer url = new StringBuffer();
+		url.append("/api/docs/").append(id).append("/").append(version);
 		ReturnDTO<APIVersionDocumentationDTO> returnDTO = new ReturnDTO<APIVersionDocumentationDTO>();
 		HttpStatus httpStatusReturn = HttpStatus.OK;
-		Chain chain = (Chain)ServiceMain.getApplicationContext().getBean("Chain");
+		Pipeline pipeline = (Pipeline)ServiceMain.getApplicationContext().getBean("Pipeline");
 		ContextECatalogue contextEcatalogue = new ContextECatalogue();
 		contextEcatalogue.put(ContextKey.TRANSACTION.getChave(), Transaction.FIND_DOCS_BY_VERSION.getChave());
 		contextEcatalogue.put(ContextKey.API_ID, id);
 		contextEcatalogue.put(ContextKey.API_VERSION, version);
-
+		contextEcatalogue.put(ContextKey.URL, url.toString());
 
 		try {
-			chain.execute(contextEcatalogue);
+			pipeline.execute(contextEcatalogue);
 			APIVersionDocumentationDTO body = (APIVersionDocumentationDTO)contextEcatalogue.get(ContextKey.DOCUMENTATION_VERSION);
 			returnDTO.setBody(body);
 		} catch (CommandException e) {

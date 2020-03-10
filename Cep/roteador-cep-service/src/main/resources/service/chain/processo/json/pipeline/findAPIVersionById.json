@@ -2,16 +2,10 @@
 	"name": "findAPIsVersionById",
 	"commandsConfiguration": [
 		{
-			"componentJSONFilename": "getApiVersionsByAPIId.json",
-			"resultados": {
-				
-			}
+			"componentJSONFilename": "getApiVersionsByAPIId.json"
 		},
 		{
-			"componentJSONFilename": "parse.json",
-			"resultados": {
-				
-			}
+			"componentJSONFilename": "parse.json"
 		}
 	]
 }

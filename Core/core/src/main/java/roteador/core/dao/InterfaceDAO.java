@@ -8,17 +8,17 @@ import roteador.core.exception.dao.DeleteException;
 import roteador.core.exception.dao.FindException;
 import roteador.core.exception.dao.UpdateException;
 
-public interface InterfaceDAO <T> {
+public interface InterfaceDAO {
 
 
-    T insert(T objeto) throws UpdateException, DataAccessException, FindException;
+    Object insert(Object objeto) throws UpdateException, DataAccessException, FindException;
     
-    T update(T objeto) throws UpdateException, DataAccessException, FindException;
+    Object update(Object objeto) throws UpdateException, DataAccessException, FindException;
 
-    void remove(T objeto) throws DeleteException;
+    void remove(Object objeto) throws DeleteException;
 
-    T findById(Class<T> klass, Object chave) throws FindException;
+    Object findById(Class<?> klass, Object chave) throws FindException;
 
-	List<T> findAll(Class<T> klass) throws FindException;
+	List<?> findAll(Class<?> klass) throws FindException;
 
 }
