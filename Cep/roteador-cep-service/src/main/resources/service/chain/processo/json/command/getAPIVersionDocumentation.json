@@ -20,7 +20,7 @@
    },
    	"forwardParams": {
 		"json": "$JSON",
-		"objectToParseString": "roteador.entities.APIVersionDocumentationDTO"
+		"objectToParseString": "[Lroteador.entities.APIVersionDocumentationDTO;"
 	},     
    "resultados":{
       "true":{

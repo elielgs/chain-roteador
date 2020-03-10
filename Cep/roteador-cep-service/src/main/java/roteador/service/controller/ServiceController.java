@@ -139,12 +139,12 @@ public class ServiceController {
 
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value="/api/docs/{id}/{version}", method = RequestMethod.GET)
-	public ResponseEntity<ReturnDTO<APIVersionDocumentationDTO>> apiDocuments(@PathVariable String id,
+	public ResponseEntity<ReturnDTO<APIVersionDocumentationDTO[]>> apiDocuments(@PathVariable String id,
 																 @PathVariable String version) {
 
 		StringBuffer url = new StringBuffer();
 		url.append("/api/docs/").append(id).append("/").append(version);
-		ReturnDTO<APIVersionDocumentationDTO> returnDTO = new ReturnDTO<APIVersionDocumentationDTO>();
+		ReturnDTO<APIVersionDocumentationDTO[]> returnDTO = new ReturnDTO<APIVersionDocumentationDTO[]>();
 		HttpStatus httpStatusReturn = HttpStatus.OK;
 		Pipeline pipeline = (Pipeline)ServiceMain.getApplicationContext().getBean("Pipeline");
 		ContextECatalogue contextEcatalogue = new ContextECatalogue();
@@ -155,7 +155,7 @@ public class ServiceController {
 
 		try {
 			pipeline.execute(contextEcatalogue);
-			APIVersionDocumentationDTO body = (APIVersionDocumentationDTO)contextEcatalogue.get(ContextKey.DOCUMENTATION_VERSION);
+			APIVersionDocumentationDTO[] body = (APIVersionDocumentationDTO[])contextEcatalogue.get(ContextKey.PARSED_JSON);
 			returnDTO.setBody(body);
 		} catch (CommandException e) {
 			returnDTO.setMessage(e.getMensagem().getChave());

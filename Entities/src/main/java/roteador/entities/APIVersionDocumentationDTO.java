@@ -1,6 +1,7 @@
 package roteador.entities;
 
 import java.io.Serializable;
+import java.util.Map;
 
 public class APIVersionDocumentationDTO implements Serializable {
 
@@ -11,7 +12,7 @@ public class APIVersionDocumentationDTO implements Serializable {
 	private String version;
 	private String title;
 	private String headline;
-	private String content;
+	private Map<String, String>[] content;
 	private String portal;
 	private String created_at;
 	public String getId() {
@@ -44,12 +45,6 @@ public class APIVersionDocumentationDTO implements Serializable {
 	public void setHeadline(String headline) {
 		this.headline = headline;
 	}
-	public String getContent() {
-		return content;
-	}
-	public void setContent(String content) {
-		this.content = content;
-	}
 	public String getPortal() {
 		return portal;
 	}
@@ -65,7 +60,11 @@ public class APIVersionDocumentationDTO implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
-	
+	public Map<String, String>[] getContent() {
+		return content;
+	}
+	public void setContent(Map<String, String>[] content) {
+		this.content = content;
+	}
 
 }
