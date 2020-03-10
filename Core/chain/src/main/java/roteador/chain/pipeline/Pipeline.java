@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -37,15 +36,11 @@ public class Pipeline implements Command, BeanFactoryAware {
 	private BeanFactory beanFactory = null;
 
 	public Pipeline() {
-		try {
-			processConfiguration();
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
-		}
+		processConfiguration();
 	}
 
-	public void processConfiguration() throws URISyntaxException {
-		File folder = new File(getClass().getClassLoader().getResource("service/chain/processo/json/pipeline").toURI());
+	public void processConfiguration() {
+		File folder = new File("/pipeline");
 
 		File[] listOfFiles = folder.listFiles();
 		Gson gson = new Gson();
@@ -77,15 +72,14 @@ public class Pipeline implements Command, BeanFactoryAware {
 		}
 	}
 
-	private void loadCommandConfigurationFromComponentFile(CommandConfiguration commandConfiguration) throws URISyntaxException {
-		File commandsConfigFolder = new File(getClass().getClassLoader().getResource("service/chain/processo/json/command/").toURI());
+	private void loadCommandConfigurationFromComponentFile(CommandConfiguration commandConfiguration) {
+		File commandsConfigFolder = new File("/command/");
 		File[] listOfFiles = commandsConfigFolder.listFiles();
-		Gson gson = new Gson();
 		
 		for (File file : listOfFiles) {
 			if (file.isFile() && commandConfiguration.getComponentJSONFilename().equals(file.getName())) {
 				try {
-					
+					Gson gson = new Gson();
 					JsonReader reader = new JsonReader(new FileReader(file));
 					CommandConfiguration commandComponentConfiguration = gson.fromJson(reader, CommandConfiguration.class);
 					commandConfiguration.setId(commandComponentConfiguration.getId());
