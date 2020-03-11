@@ -167,7 +167,7 @@ public class PipelineEngine {
 	 */
 	private void executarCommand(final CommandConfiguration previousCommand,
 			final CommandConfiguration nextCommandConfiguration) throws Exception {
-		configureNextCommand(previousCommand, nextCommandConfiguration);
+		preProcessCommand(previousCommand, nextCommandConfiguration);
 
 		if (nextCommandConfiguration.getExecuteComponent() != null) {
 			final boolean execucao = executarCommand(nextCommandConfiguration, this.context);
@@ -214,24 +214,7 @@ public class PipelineEngine {
 //        }
 	}
 
-	@SuppressWarnings("unchecked")
-	private void configureNextCommand(final CommandConfiguration previousCommand,
-			final CommandConfiguration nextCommandConfiguration) {
-		this.context.put(ContextKey.PARAMS, nextCommandConfiguration.getParams());
-		if (nextCommandConfiguration.getParameterConstructor() != null) {
-			nextCommandConfiguration.getParameterConstructor().setObject(this.context);
-		}
-		if (previousCommand != null) {
-			if (previousCommand.getForwardParams() != null) {
-				Map<String, String> params = (Map<String, String>) this.context.get(ContextKey.PARAMS);
-				if (params != null) {
-					params.putAll(previousCommand.getForwardParams());
-				} else {
-					this.context.put(ContextKey.PARAMS, previousCommand.getForwardParams());
-				}
-			}
-		}
-	}
+
 
 	private void executeNextCommand(final String nextId, final CommandConfiguration actualCommand) throws Exception {
 		List<CommandConfiguration> commandsList = pipelineConfiguration.getCommandsConfiguration();
@@ -261,34 +244,55 @@ public class PipelineEngine {
 			throws Exception {
 		boolean retorno = ((Command) beanContext.getBean(commandConfiguration.getExecuteComponent())).execute(ctx);
 
+		posProcessCommand(commandConfiguration, ctx);
+		return retorno;
+	}
+	
+	@SuppressWarnings("unchecked")
+	/**
+	 * Seta os atributos que a próxima command está construindo assim como busca na command anterior os atributos que devem ser passados desta para a nova dentro do contexto
+	 * @param previousCommand Command anteriormente carregada
+	 * @param nextCommandConfiguration Próxima command a ser executada
+	 */
+	private void preProcessCommand(final CommandConfiguration previousCommand,
+			final CommandConfiguration nextCommandConfiguration) {
+		this.context.put(ContextKey.PARAMS, nextCommandConfiguration.getParams());
+		if (nextCommandConfiguration.getParameterConstructor() != null) {
+			nextCommandConfiguration.getParameterConstructor().setObject(this.context);
+		}
+		if (previousCommand != null) {
+			if (previousCommand.getForwardParams() != null) {
+				Map<String, String> params = (Map<String, String>) this.context.get(ContextKey.PARAMS);
+				if (params != null) {
+					params.putAll(previousCommand.getForwardParams());
+				} else {
+					this.context.put(ContextKey.PARAMS, previousCommand.getForwardParams());
+				}
+			}
+		}
+	}
+
+	private void posProcessCommand(final CommandConfiguration commandConfiguration, final Context ctx)
+			throws IllegalAccessException, InvocationTargetException {
 		if (commandConfiguration.getContextTransform() != null) {
 			Object objetoContexto = context
 					.get(ContextKey.valueOf(commandConfiguration.getContextTransform().getSourceContextKey()));
 
-			Object objetoRetorno = getObject(commandConfiguration, ctx, objetoContexto);
-			ctx.put(ContextKey.valueOf(commandConfiguration.getContextTransform().getDestinationContextKey()), objetoRetorno);
-		}
-		return retorno;
-	}
+			Method[] methods = objetoContexto.getClass().getMethods();
+			Object objetoRetorno = objetoContexto;
 
-	private Object getObject(CommandConfiguration commandConfiguration, final Context ctx, Object objetoContexto)
-			throws IllegalAccessException, InvocationTargetException {
-		Method[] methods = objetoContexto.getClass().getMethods();
-
-		Object objetoRetorno = objetoContexto;
-
-		Iterator<String> methodDesc = commandConfiguration.getContextTransform().getTransformationObject().iterator();
-		while (methodDesc.hasNext()) {
-			String wishedMethod = methodDesc.next();
-			for (int i = 0; i < methods.length; i++) {
-				Method method = methods[i];
-				if (method.getName().equals(wishedMethod)) {
-					objetoRetorno = method.invoke(objetoContexto);
-					break;
+			Iterator<String> methodDesc = commandConfiguration.getContextTransform().getTransformationObject().iterator();
+			while (methodDesc.hasNext()) {
+				String wishedMethod = methodDesc.next();
+				for (int i = 0; i < methods.length; i++) {
+					Method method = methods[i];
+					if (method.getName().equals(wishedMethod)) {
+						objetoRetorno = method.invoke(objetoContexto);
+						break;
+					}
 				}
 			}
+			ctx.put(ContextKey.valueOf(commandConfiguration.getContextTransform().getDestinationContextKey()), objetoRetorno);
 		}
-		return objetoRetorno;
 	}
-
 }

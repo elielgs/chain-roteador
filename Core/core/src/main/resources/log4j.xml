@@ -11,16 +11,6 @@
 
     <appender name="ASYNC" class="org.apache.log4j.AsyncAppender">
         <appender-ref ref="CONSOLE" />
-        <appender-ref ref="FILE" />
-    </appender>
-
-    <appender name="FILE" class="org.apache.log4j.RollingFileAppender">
-        <param name="File" value="${log.dir}"/>
-        <param name="MaxFileSize" value="10MB" />
-        <param name="MaxBackupIndex" value="5" />
-        <layout class="org.apache.log4j.PatternLayout">
-            <param name="ConversionPattern" value="%d{ISO8601}{GMT} [%-5p] [%t] [%c{2}] - %m%n" />
-        </layout>
     </appender>
 
     <root>

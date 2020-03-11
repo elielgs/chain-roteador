@@ -9,7 +9,7 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>Cep/roteador-cep-service</module>
+		<module>Services/roteador-cep-service</module>
 		<module>Core/chain</module>
 		<module>Core/core</module>
 		<module>Entities</module>

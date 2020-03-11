@@ -17,10 +17,6 @@ public class CommandConfiguration {
     private ContextTransform contextTransform;
     private ParameterConstructor parameterConstructor;
 
-    public CommandConfiguration() {
-        //Construtor
-    }
-
     public CommandConfiguration(final String executa) {
         this.executeComponent = executa;
     }

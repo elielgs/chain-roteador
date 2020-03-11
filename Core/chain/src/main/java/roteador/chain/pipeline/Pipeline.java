@@ -15,6 +15,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
+import org.springframework.beans.factory.annotation.Configurable;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
@@ -26,6 +27,7 @@ import roteador.core.exception.command.CommandException;
 import roteador.core.exception.command.TransactionNotFoundException;
 import roteador.core.exception.service.ServiceException;
 import roteador.core.exception.service.TransactionExecutionException;
+
 
 public class Pipeline implements Command, BeanFactoryAware {
 
